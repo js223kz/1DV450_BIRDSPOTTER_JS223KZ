@@ -12,4 +12,11 @@ class UserTest < ActiveSupport::TestCase
   
   assert user.save
   end
+  
+  test "Don't save without username and password" do
+    user = User.new
+    
+    assert user.save
+  end
+  
 end
