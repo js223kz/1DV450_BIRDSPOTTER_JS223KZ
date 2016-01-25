@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
     
+    has_many :applications
+    
     #validera att det inte är kortare än 6 bokstäver
     #strippa från skadlig kod
     validates :username, presence:true

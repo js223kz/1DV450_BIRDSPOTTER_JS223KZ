@@ -16,7 +16,7 @@ class UserTest < ActiveSupport::TestCase
   test "Don't save without username and password" do
     user = User.new
     
-    assert user.save
+    assert_not user.save
   end
   
 end
