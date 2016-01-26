@@ -6,33 +6,25 @@ class UserTest < ActiveSupport::TestCase
   # end
   
   def setup
-    @user = User.new(username: "JS@powerapp.se", password: "ladymac74")
+    @user = User.new(username: "JS@powerapp.se", password: "foobar", password_confirmation: "foobar")
   end
 
   test "User should be valid" do
     assert @user.valid?
   end
   
-  test "should not be valid without username and password" do
-    @user.username = ""
-    @user.password = ""
-    
-    assert_not @user.valid?
-  end
-  
-  test "Should not be valid without username" do
-    @user.username = ""
-    
+  test "should not be valid without username" do
+    @user.username = "  "
     assert_not @user.valid?
   end
   
   test "Should not be valid without password" do
-    @user.password = ""
+    @user.password = @user.password_confirmation = " " * 6
     assert_not @user.valid?
   end
   
   test "Password should not be shorter than 6 cahracters" do
-    @user.password = "aaaa"
+    @user.password = @user.password_confirmation = "aaaa"
     assert_not @user.valid?
   end
   
