@@ -2,11 +2,13 @@ class User < ActiveRecord::Base
     
     has_many :applications
     
-    #validera att det inte är kortare än 6 bokstäver
+    VALID_EMAIL_REGEX = /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
     #strippa från skadlig kod
-    validates :username, presence:true
+    validates :username, presence:true, length: { maximum: 255 }, 
+                        format: { with: VALID_EMAIL_REGEX },
+                        uniqueness: { case_sensitive: false }
     
-    #validera att det är ett password
+    
     #strippa från skadlig kod
-    validates :password, presence:true
+    validates :password, presence:true, length: { minimum: 6, maximum: 255 }
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160125165001) do
+ActiveRecord::Schema.define(version: 20160126151014) do
 
   create_table "applications", force: :cascade do |t|
     t.string   "applicationkey"
@@ -29,5 +29,7 @@ ActiveRecord::Schema.define(version: 20160125165001) do
     t.string   "username"
     t.string   "password"
   end
+
+  add_index "users", ["username"], name: "index_users_on_username", unique: true
 
 end
