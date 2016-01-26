@@ -6,7 +6,7 @@ class UserTest < ActiveSupport::TestCase
   # end
   
   def setup
-    @user = User.new(username: "js@powerapp.se", password: "ladymac74")
+    @user = User.new(username: "JS@powerapp.se", password: "ladymac74")
   end
 
   test "User should be valid" do
@@ -60,11 +60,14 @@ class UserTest < ActiveSupport::TestCase
     end
   end
   
-    test "Username should be unique" do
+  test "Username should be unique" do
     duplicate_user = @user.dup
-    duplicate_user.username = @user.username.upcase
+    duplicate_user.username = @user.username.downcase
     @user.save
     assert_not duplicate_user.valid?
   end
-
+  
+  test "Username should be lowercase" do
+    assert @user.username.downcase
+  end
 end
