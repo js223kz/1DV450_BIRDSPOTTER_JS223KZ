@@ -1,36 +1,36 @@
 require 'test_helper'
 
+
 class UserTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
   
   def setup
-    @user = User.new(username: "JS@powerapp.se", password: "foobar", password_confirmation: "foobar")
+    @user = User.new(username: "JS@powerapp.se", password: "foobar", admin:"", password: "foobar", password_confirmation: "foobar")
   end
 
   test "User should be valid" do
     assert @user.valid?
   end
   
-  test "should not be valid without username" do
+  test "User should not be valid without username" do
     @user.username = "  "
     assert_not @user.valid?
   end
   
-  test "Should not be valid without password" do
+  test "Password should be present (nonblank)" do
     @user.password = @user.password_confirmation = " " * 6
     assert_not @user.valid?
   end
   
-  test "Password should not be shorter than 6 cahracters" do
-    @user.password = @user.password_confirmation = "aaaa"
+  test "Password should have a minimum length" do
+    @user.password = @user.password_confirmation = "a" * 5
     assert_not @user.valid?
   end
   
-  test "Username or password should not be too long" do
-    @user.username = "a" * 244 + "@example.com"
-    @user.password = "a" * 244 + "lalala"
+  test "Username should not be too long" do
+    @user.username = "a" * 70 + "@example.com"
     assert_not @user.valid?
   end
   
@@ -62,4 +62,6 @@ class UserTest < ActiveSupport::TestCase
   test "Username should be lowercase" do
     assert @user.username.downcase
   end
+
 end
+

@@ -11,25 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160126162131) do
+ActiveRecord::Schema.define(version: 20160201175212) do
 
   create_table "applications", force: :cascade do |t|
-    t.string   "applicationkey"
-    t.string   "applicationname"
+    t.string   "application_name"
+    t.string   "application_key"
     t.integer  "user_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   add_index "applications", ["user_id"], name: "index_applications_on_user_id"
 
   create_table "users", force: :cascade do |t|
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.string   "username"
+    t.string   "username",        limit: 70
     t.string   "password_digest"
+    t.boolean  "admin",                      default: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
   end
-
-  add_index "users", ["username"], name: "index_users_on_username", unique: true
 
 end
