@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-    has_many :applications
+    has_many :applications, :dependent => :destroy
     before_save { self.username = username.downcase }
     
     VALID_EMAIL_REGEX = /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i

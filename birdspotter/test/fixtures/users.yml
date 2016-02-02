@@ -5,20 +5,17 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-    id:1
-    username: info@webbteknik.se
-    password: hejsanhoppsan
-    password_confirmation: hejsanhoppsan
+ id: 1
+ username: info@webbteknik.se
+ password_digest: hejsanhoppsan
 
 two:
-    id: 2
-    username: info@aspnet.com
-    password: jättetråkigt
-    password_confirmation: jättetråkigt
-    
+ id: 2
+ username: info@aspnet.com
+ password_digest: jättetråkigt
+
 three:
-    id: 3
-    username: js@phpfan.se
-    password: loveit
-    password_confirmation: loveit
+ id: 3
+ username: js@phpfan.se
+ password_digest: loveit
 

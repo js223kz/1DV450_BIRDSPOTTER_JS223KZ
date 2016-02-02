@@ -62,6 +62,12 @@ class UserTest < ActiveSupport::TestCase
   test "Username should be lowercase" do
     assert @user.username.downcase
   end
-
+  
+  test "Removing a User should remove all users applications" do
+    assert_difference('Application.count', difference = -1) do
+      u = User.find(1)
+      u.destroy
+   end 
+  end
 end
 

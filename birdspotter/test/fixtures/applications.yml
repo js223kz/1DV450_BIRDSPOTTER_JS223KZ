@@ -5,19 +5,19 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-    id: 1
-    application_key: kjasgfuegfugfjbvnbhvdg6762811ghjfew
-    application_name: minfantastiskaapp
-    user_id: 1
+ id: 1
+ application_key: kjasgfuegfugfjbvnbhvdg6762811ghjfew
+ application_name: minfantastiskaapp
+ user_id: 1
 
 two:
-    id: 2
-    application_key: qkOE2IU484IHRWJKRAJFABJ754FBZKVDGFJ
-    application_name: minmindrefantastiskaapp
-    user_id: 2
+ id: 2
+ application_key: qkOE2IU484IHRWJKRAJFABJ754FBZKVDGFJ
+ application_name: minmindrefantastiskaapp
+ user_id: 2
 
 three:
-    id: 3
-    application_key: qkOE2IU484IHRWJKRAafdqrtdwd2e142eqr
-    application_name: superappen
-    user_id: 3
+ id: 3
+ application_key: qkOE2IU484IHRWJKRAafdqrtdwd2e142eqr
+ application_name: superappen
+ user_id: 3
