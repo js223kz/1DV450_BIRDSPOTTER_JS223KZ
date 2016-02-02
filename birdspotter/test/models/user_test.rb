@@ -7,7 +7,7 @@ class UserTest < ActiveSupport::TestCase
   # end
   
   def setup
-    @user = User.new(username: "JS@powerapp.se", password: "foobar", admin:"", password: "foobar", password_confirmation: "foobar")
+    @user = User.new(username: "JS@powerapp.se", admin:"", password: "foobar", password_confirmation: "foobar")
   end
 
   test "User should be valid" do
