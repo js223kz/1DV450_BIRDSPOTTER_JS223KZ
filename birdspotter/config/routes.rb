@@ -9,9 +9,9 @@ Rails.application.routes.draw do
   root  'start#start'
   get 'login' => 'start#login'
   get 'signup' => 'users#new'
+  resources :users
 
-  
-  get "start/" => "start#index"
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
