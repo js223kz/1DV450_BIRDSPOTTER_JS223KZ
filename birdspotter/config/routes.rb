@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'login/new'
+
+  get 'sessions/new'
+
   get 'users/new'
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -7,7 +11,10 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   #root 'welcome#index'
   root  'start#start'
-  get 'login' => 'start#login'
+  get    'login'   => 'login#new'
+  post   'login'   => 'login#login'
+  delete 'logout'  => 'login#logout'
+
   get 'signup' => 'users#new'
   resources :users
 
