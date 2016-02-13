@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  
+  before_action :logged_in_user, only: [:show]
   def new
     @user = User.new
   end
@@ -28,6 +28,16 @@ class UsersController < ApplicationController
     
     def user_params
       params.require(:user).permit(:username, :password, :password_confirmation)
+    end
+    
+    # Before filters
+
+    # Confirms a logged-in user.
+    def logged_in_user
+      unless logged_in?
+        flash[:danger] = "Du måste vara inloggad för att se denna sidan."
+        redirect_to login_url
+      end
     end
   
   

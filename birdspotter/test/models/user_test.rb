@@ -2,10 +2,7 @@ require 'test_helper'
 
 
 class UserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
-  
+
   def setup
     @user = User.new(username: "JS@powerapp.se", admin:"", password: "foobar", password_confirmation: "foobar")
   end
@@ -64,8 +61,9 @@ class UserTest < ActiveSupport::TestCase
   end
   
   test "Removing a User should remove all users applications" do
-    assert_difference('Application.count', difference = -1) do
-      u = User.find(1)
+    @user = users(:one)
+    assert_difference('Apikey.count', -1) do
+      u = User.find(@user)
       u.destroy
    end 
   end

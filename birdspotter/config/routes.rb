@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'apikey/new'
+
   get 'login/new'
 
   get 'sessions/new'
@@ -14,9 +16,9 @@ Rails.application.routes.draw do
   get    'login'   => 'login#new'
   post   'login'   => 'login#login'
   delete 'logout'  => 'login#logout'
-
   get 'signup' => 'users#new'
   resources :users
+  resources :apikeys
 
 
   # Example of regular route:

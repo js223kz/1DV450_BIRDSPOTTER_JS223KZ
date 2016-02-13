@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-    has_many :applications, :dependent => :destroy
+    has_many :apikeys, :dependent => :destroy
     before_save { self.username = username.downcase }
     
     VALID_EMAIL_REGEX = /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
@@ -16,6 +16,4 @@ class User < ActiveRecord::Base
                                                   BCrypt::Engine.cost
         BCrypt::Password.create(string, cost: cost)
     end
-    
-    
 end
