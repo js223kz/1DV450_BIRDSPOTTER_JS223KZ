@@ -6,5 +6,16 @@
         <%= @user.username %>
       </h1>
     </section>
+    <section class="col-md-8">
+      <% if @user.apikeys.any? %>
+        <ol class="apikeys">
+          <%= render @apikeys %>
+        </ol>
+        <%= will_paginate @apikeys %>
+        <% else %>
+        <p>Du har inga apinycklar</p>
+      <% end %>
+      </ol>
+    </section>
   </aside>
 </div>

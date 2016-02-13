@@ -18,7 +18,8 @@ Rails.application.routes.draw do
   delete 'logout'  => 'login#logout'
   get 'signup' => 'users#new'
   resources :users
-  resources :apikeys
+  resources :apikeys,          only: [:create, :destroy]
+
 
 
   # Example of regular route:
