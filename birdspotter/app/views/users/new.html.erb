@@ -3,8 +3,11 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
+    <% flash.each do  message| %>
+    <div class="alert alert-danger"<%= message %></div>
+    <% end %>
     <%= form_for(@user) do |f| %>
-        <%= render 'shared/error_messages' %>
+        <%= render 'shared/error_messages', object: f.object %>
         <%= f.email_field :username, class: 'form-control', :placeholder => "E-post" %>
         <%= f.password_field :password, class: 'form-control', :placeholder => "Lösenord" %>
         <%= f.password_field :password_confirmation, class: 'form-control', :placeholder => "Bekräfta lösenord" %>

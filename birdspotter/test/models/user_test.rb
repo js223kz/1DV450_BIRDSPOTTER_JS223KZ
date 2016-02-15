@@ -25,12 +25,7 @@ class UserTest < ActiveSupport::TestCase
     @user.password = @user.password_confirmation = "a" * 5
     assert_not @user.valid?
   end
-  
-  test "Username should not be too long" do
-    @user.username = "a" * 70 + "@example.com"
-    assert_not @user.valid?
-  end
-  
+
   test "Email validation should accept valid addresses as username" do
     valid_addresses = %w[user@example.com USER@foo.COM A_US-ER@foo.bar.org
                          first.last@foo.jp alice+bob@baz.cn]

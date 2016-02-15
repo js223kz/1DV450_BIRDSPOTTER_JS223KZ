@@ -1,25 +1,25 @@
 class UsersController < ApplicationController
   
   before_action :logged_in_user, only: [:show]
+
   def new
     @user = User.new
   end
   
-  
   def create
     @user = User.new(user_params)
-      if @user.save
-        log_in @user
-        flash[:success] = "Välkommen till ditt Birdspotterkonto"
-        redirect_to @user
-      else
-        render 'new'
-      end
+    if @user.save
+      log_in @user
+      flash[:success] = "Välkommen till ditt Birdspotterkonto"
+      redirect_to @user
+    else
+      render "new"
+    end
   end
   
   def show
-    @user = User.find(params[:id])
-    @apikeys = @user.apikeys.paginate(page: params[:page], per_page: 5)
+    @apikey  = current_user.apikeys.build
+    @apikeys = current_user.apikeys.paginate(page: params[:page], per_page: 5)
   end
   
   
@@ -30,17 +30,5 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:username, :password, :password_confirmation)
     end
-    
-    # Before filters
-
-    # Confirms a logged-in user.
-    def logged_in_user
-      unless logged_in?
-        flash[:danger] = "Du måste vara inloggad för att se denna sidan."
-        redirect_to login_url
-      end
-    end
-  
-  
- end 
+end 
 

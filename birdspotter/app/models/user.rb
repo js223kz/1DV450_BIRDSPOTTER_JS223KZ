@@ -1,13 +1,20 @@
 class User < ActiveRecord::Base
+    has_secure_password
     has_many :apikeys, :dependent => :destroy
     before_save { self.username = username.downcase }
     
-    VALID_EMAIL_REGEX = /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
-    validates :username, presence:true, length: { maximum: 70 }, 
-                        format: { with: VALID_EMAIL_REGEX },
-                        uniqueness: { case_sensitive: false }
-    has_secure_password
-    validates :password, presence:true, length: { minimum: 6}
+    validates   :username, 
+                :presence => {:message => "Du måste ange en e-post."}, 
+                :uniqueness => { case_sensitive: false, 
+                                :message => "E-postadressen finns redan." }
+
+    validates_format_of :username,
+                        :with => /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i,
+                        :presence => {:message => "E-post har angivits i ett felaktigt format."}
+    
+    validates   :password, 
+                :presence => {:message => "Du måste ange ett lösenord."}, 
+                :length => { minimum: 6, :message => "Löseordet måste innehålla minst 6 tecken."}
     
     # Returns the hash digest of the given string at min cost 
     # in testing and normal high cost in production
