@@ -18,8 +18,14 @@ class UsersController < ApplicationController
   end
   
   def show
-    @apikey  = current_user.apikeys.build
-    @apikeys = current_user.apikeys.paginate(page: params[:page], per_page: 5)
+     @user = current_user
+    if @user.admin
+      @apikeys = Apikey.all.paginate(page: params[:page], per_page: 5)
+      @apikey  = @apikeys.build
+    else
+      @apikey  = @user.apikeys.build
+      @apikeys = @user.apikeys.paginate(page: params[:page], per_page: 5)
+    end
   end
   
   

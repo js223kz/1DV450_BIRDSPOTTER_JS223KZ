@@ -7,4 +7,9 @@ class UsersControllerTest < ActionController::TestCase
     assert_select "title", "Registrera konto | Birdspotter"
   end
 
+  test "should redirect index when not logged in" do
+    get :index
+    assert_redirected_to login_path
+  end
+
 end
