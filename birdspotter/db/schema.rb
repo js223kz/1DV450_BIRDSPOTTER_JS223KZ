@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160201175212) do
+ActiveRecord::Schema.define(version: 20160204152749) do
 
-  create_table "applications", force: :cascade do |t|
+  create_table "apikeys", force: :cascade do |t|
     t.string   "application_name"
     t.string   "application_key"
     t.integer  "user_id"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20160201175212) do
     t.datetime "updated_at",       null: false
   end
 
-  add_index "applications", ["user_id"], name: "index_applications_on_user_id"
+  add_index "apikeys", ["user_id"], name: "index_apikeys_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "username",        limit: 70

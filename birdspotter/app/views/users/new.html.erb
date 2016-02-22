@@ -1,14 +1,12 @@
 <% provide(:title, 'Registrera konto') %>
-<h1>Registera</h1>
-
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@user) do |f| %>
-        <%= render 'shared/error_messages' %>
-        <%= f.email_field :username, class: 'form-control', :placeholder => "E-post" %>
-        <%= f.password_field :password, class: 'form-control', :placeholder => "Lösenord" %>
-        <%= f.password_field :password_confirmation, class: 'form-control', :placeholder => "Bekräfta lösenord" %>
-        <%= f.submit "Skapa konto", class: "btn btn-primary" %>
-    <% end %>
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <div class="col-sm-offset-2 col-sm-offset-2 col-lg-offset-2">
+      <%= form_for(@user) do |f| %>
+          <%= render 'shared/error_messages' %>
+          <%= f.email_field :username, class: 'form-control', :placeholder => "E-post" %>
+          <%= f.password_field :password, class: 'form-control', :placeholder => "Lösenord" %>
+          <%= f.password_field :password_confirmation, class: 'form-control', :placeholder => "Bekräfta lösenord" %>
+          <%= f.submit "Skapa konto", class: "btn submit_button" %>
+      <% end %>
+    </div>
   </div>
-</div>
