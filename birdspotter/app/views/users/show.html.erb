@@ -7,9 +7,9 @@
      <%= render 'apikeys/apikey_form' %>
   </div>
   <div>
-    % if @user.apikeys.any? %>
+    <% if @user.apikeys.any? %>
         <ol class="apikeys">
-          <%= render @apikey %>
+          <%= render 'apikeys/apikey' %>
         </ol>
         <%= will_paginate @apikeys %>
         <% else %>

@@ -17,7 +17,6 @@ class UsersController < ApplicationController
   end
   
   def show
-    @apikey = Apikey.new
     @user = User.find(params[:id])
     @apikey  = current_user.apikeys.build
     @apikeys = current_user.apikeys.paginate(page: params[:page], per_page: 5)

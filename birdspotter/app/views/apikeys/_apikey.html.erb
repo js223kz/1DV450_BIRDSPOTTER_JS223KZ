@@ -1,6 +1,9 @@
-<li id="apikey-<%= @apikey.id %>">
-  <span class="application_name"><%= @apikey.application_name %></span>
-  <span class="application_key"><%= @apikey.application_key %></span>
-  <%= link_to "Radera", @apikey, method: :delete,
-                                       data: { confirm: "You sure?" } %>
+<% @apikeys.each do |element| %>
+ <li id="apikey-<%= element.id %>">
+  <span class="application_name"><%= element.application_name %></span>
+  <span class="application_key"><%= element.application_key %></span>
+  <%= link_to "Radera", element, method: :delete,
+                                       data: { confirm: "Är du säker på att applikationen ska raderas?" } %>
 </li>
+<% end %>
+
