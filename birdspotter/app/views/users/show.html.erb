@@ -3,6 +3,18 @@
   <h1>
     <%= @user.username %>
   </h1>
-  <%= render 'apikeys/apikey_form' %>
-  <%= render 'apikeys/apikey' %>
+  <div>
+     <%= render 'apikeys/apikey_form' %>
+  </div>
+  <div>
+    % if @user.apikeys.any? %>
+        <ol class="apikeys">
+          <%= render @apikey %>
+        </ol>
+        <%= will_paginate @apikeys %>
+        <% else %>
+        <p>Du har inga apinycklar</p>
+      <% end %>
+      </ol>
+  </div>
 </div>

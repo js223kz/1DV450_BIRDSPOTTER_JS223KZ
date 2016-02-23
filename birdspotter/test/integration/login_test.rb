@@ -6,17 +6,17 @@ class LoginTest < ActionDispatch::IntegrationTest
   end
 
  test "login with invalid information" do
-    get login_path
-    assert_template 'login/new'
+    get root_path
+    assert_template 'start/start'
     post login_path, login: { username: "", password: "" }
-    assert_template 'login/new'
+    assert_template 'start/start'
     assert_not flash.empty?
     get root_path
     assert flash.empty?
   end
   
   test "login with valid information followed by logout" do
-    get login_path
+    get root_path
     post login_path, login: { username: @user.username, password: 'hejsanhoppsan' }
     assert is_logged_in?
     assert_redirected_to @user

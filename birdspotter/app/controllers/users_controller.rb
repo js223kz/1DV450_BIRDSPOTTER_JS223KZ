@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  
+  before_action :logged_in?, only: [:show]
   
   def new
     @user = User.new
@@ -19,6 +19,8 @@ class UsersController < ApplicationController
   def show
     @apikey = Apikey.new
     @user = User.find(params[:id])
+    @apikey  = current_user.apikeys.build
+    @apikeys = current_user.apikeys.paginate(page: params[:page], per_page: 5)
   end
   
   
@@ -29,7 +31,5 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:username, :password, :password_confirmation)
     end
-  
-  
- end 
+end 
 

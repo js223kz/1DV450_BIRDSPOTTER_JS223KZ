@@ -64,7 +64,7 @@ class UserTest < ActiveSupport::TestCase
   end
   
   test "Removing a User should remove all users applications" do
-    assert_difference('Application.count', difference = -1) do
+    assert_difference('Apikey.count', -1) do
       u = User.find(1)
       u.destroy
    end 

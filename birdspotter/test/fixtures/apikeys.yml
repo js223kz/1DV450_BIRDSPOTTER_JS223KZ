@@ -5,19 +5,16 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
- id: 1
- application_key: kjasgfuegfugfjbvnbhvdg6762811ghjfew
  application_name: minfantastiskaapp
- user_id: 1
+ user: one
+ created_at: <%= 10.minutes.ago %>
 
 two:
- id: 2
- application_key: qkOE2IU484IHRWJKRAJFABJ754FBZKVDGFJ
  application_name: minmindrefantastiskaapp
- user_id: 2
+ user: two
+ created_at: <%= 3.years.ago %>
 
-three:
- id: 3
- application_key: qkOE2IU484IHRWJKRAafdqrtdwd2e142eqr
+latest:
  application_name: superappen
- user_id: 3
+ user: three
+ created_at: <%= Time.zone.now %>

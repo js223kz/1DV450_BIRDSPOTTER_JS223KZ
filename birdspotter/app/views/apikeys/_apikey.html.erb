@@ -1,0 +1,6 @@
+<li id="apikey-<%= @apikey.id %>">
+  <span class="application_name"><%= @apikey.application_name %></span>
+  <span class="application_key"><%= @apikey.application_key %></span>
+  <%= link_to "Radera", @apikey, method: :delete,
+                                       data: { confirm: "You sure?" } %>
+</li>
