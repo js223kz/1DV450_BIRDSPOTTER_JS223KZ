@@ -5,14 +5,14 @@ class ApikeysController < ApplicationController
   def create
     @apikey = current_user.apikeys.build(apikey_params)
     if @apikey.save
-      flash[:success] = "Du har registrerat en ny applikation"
+      flash[:success] = "Du har registrerat en ny applikation."
       
       #this redirects user to page that
       #issued create
       redirect_to request.referrer || root_url
     else
-      flash.now[:danger] = 'Vi kunde i spara din applikation. Försök igen.'
-      redirect_to current_user
+      flash[:danger] = "Du måste namnge din applikation."
+      redirect_to request.referrer || root_url
     end
   end
   

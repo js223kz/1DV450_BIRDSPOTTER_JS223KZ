@@ -21,87 +21,7 @@
   font-size: $size;
   font-size: calculateRem($size);
 }
-
-.info_wrapper{
-  border: 1px solid brown;
-  border-radius: 5px;
-  height: auto;
-  padding: 10px;
-  margin-bottom: 20px;
-}
-
-
-/*template view*/
-
-#main_container{
-  min-height: 600px;
-  padding-top: 20px;
-}
-
-/*startview*/
-.startview_logo{
-  margin-bottom: 20px;
-}
-
-#logo_image{
-  max-width: 100%;
-  height: auto;
-  
-}
-
-/* header */
-
-.navbar{
-  background-color: brown;
-}
-
-li{
-  float: left;
-   @include font-size(24px)
-}
-
-
-/* footer */
-
-footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid brown;
-  clear: both;
-  small{
-    float: left;
-  }
-}
-
-
-/* typography */
-
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1;
-}
-
-h1 {
-  font-size: 3em;
-  letter-spacing: -2px;
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-h2 {
-  font-size: 1.2em;
-  letter-spacing: -1px;
-  margin-bottom: 30px;
-  text-align: center;
-  font-weight: normal;
-  color: $light-gray;
-}
-
-p {
-  @include font-size(24px);
-  font-color: white;
-}
 /* universal */
-
 body {
   padding-top: 60px;
 }
@@ -119,21 +39,90 @@ textarea {
   resize: vertical;
 }
 
-.header_link{
-  color: white;
-  &:hover {
-    color: black;
-    text-decoration: none;
-  }
-}
-
-
 .center {
   text-align: center;
   h1{
     margin-bottom: 10px;
   }
 }
+
+/*template view*/
+#main_container{
+  min-height: 600px;
+  padding-top: 20px;
+}
+
+.navbar{
+  background-color: brown;
+  li{
+    float: left;
+     @include font-size(24px)
+  }
+  .header_link{
+    color: white;
+      &:hover {
+        color: black;
+        text-decoration: none;
+    }
+  }
+}
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid brown;
+  clear: both;
+  small{
+    float: left;
+  }
+}
+
+
+/*start view*/
+.info_wrapper{
+  border: 1px solid brown;
+  border-radius: 5px;
+  height: auto;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+#logo_image{
+  max-width: 100%;
+  height: auto;
+}
+
+.startview_logo{
+  margin-bottom: 20px;
+}
+
+/*specific user view*/
+
+.username_header{
+  font-size: 2.5vmin;
+  font-weight: 600;
+}
+.apikeys_list{
+  ul{
+    list-style-type: none;
+    margin-left: 0; 
+    margin-top:20px;
+    padding: 0;
+    li{
+      border-bottom: 1px solid brown; 
+      max-width:100%;
+      min-width:100%;
+    }
+  }
+  .application_name{
+    font-weight: 400;
+    font-size: 2vmin;
+  }
+  .application_key{
+    font-size: 1.1vmin;
+  }
+}
+
 
 
 
@@ -144,11 +133,9 @@ input, textarea, select, .uneditable-input {
   margin-bottom: 15px;
   @include box_sizing;
 }
-
 input {
   height: auto !important;
 }
-
 #error_explanation {
   color: black;
   ul {
@@ -156,7 +143,6 @@ input {
     margin: 10px;
   }
 }
-
 .field_with_errors {
   @extend .has-error;
   .form-control {
@@ -165,9 +151,7 @@ input {
 }
 
 /* miscellaneous */
-
-
-.debug_dump {
+debug_dump {
   clear: both;
   float: left;
   width: 100%;
