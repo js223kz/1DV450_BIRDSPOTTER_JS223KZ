@@ -1,0 +1,20 @@
+<% provide(:title, @user.username) %>
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+  <h1 class="username_header">
+    <%= @user.username %>
+  </h1>
+  <div class='apikey_form'>
+    <%= render 'apikeys/apikey_form' %>
+  </div>
+  <div class='apikeys_list'>
+    <% if @user.apikeys.any? %>
+        <ul class="apikeys">
+          <%= render 'apikeys/apikey' %>
+        </ul>
+        <%= will_paginate @apikeys %>
+        <% else %>
+        <p>Du har inga apinycklar</p>
+      <% end %>
+      </ol>
+  </div>
+</div>
