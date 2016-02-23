@@ -2,7 +2,10 @@ require 'test_helper'
 
 
 class UserTest < ActiveSupport::TestCase
-
+  # test "the truth" do
+  #   assert true
+  # end
+  
   def setup
     @user = User.new(username: "JS@powerapp.se", admin:"", password: "foobar", password_confirmation: "foobar")
   end
@@ -25,7 +28,12 @@ class UserTest < ActiveSupport::TestCase
     @user.password = @user.password_confirmation = "a" * 5
     assert_not @user.valid?
   end
-
+  
+  test "Username should not be too long" do
+    @user.username = "a" * 70 + "@example.com"
+    assert_not @user.valid?
+  end
+  
   test "Email validation should accept valid addresses as username" do
     valid_addresses = %w[user@example.com USER@foo.COM A_US-ER@foo.bar.org
                          first.last@foo.jp alice+bob@baz.cn]
@@ -53,14 +61,6 @@ class UserTest < ActiveSupport::TestCase
   
   test "Username should be lowercase" do
     assert @user.username.downcase
-  end
-  
-  test "Removing a User should remove all users applications" do
-    @user = users(:one)
-    assert_difference('Apikey.count', -1) do
-      u = User.find(@user)
-      u.destroy
-   end 
   end
 end
 

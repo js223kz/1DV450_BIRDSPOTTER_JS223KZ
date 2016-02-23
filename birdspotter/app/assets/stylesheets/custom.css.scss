@@ -4,6 +4,7 @@
 /* mixins, variables, etc. */
   $light-gray: #777;
   $gray-medium-light: #eaeaea;
+  $skyblue: #A2E9F9;
   
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
@@ -11,85 +12,27 @@
   box-sizing:         border-box;
 }
 
-
-/* header */
-
-#logo {
-  float: left;
-  margin-right: 10px;
-  font-size: 1.7em;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: -1px;
-  padding-top: 9px;
-  font-weight: bold;
-  &:hover{
-    color: white;
-    text-decoration: none;
-  }
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
 }
 
-/* footer */
-
-footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid #eaeaea;
-  color: $light-gray;
-  a{
-    color: #555;
-    &:hover{
-      color: #222;
-    }
-  }
-  small{
-    float: left;
-  }
-  ul{
-    float: right;
-    list-style: none;
-    li{
-      float: left;
-      margin-left: 15px;
-    }
-  }
-}
-
-
-/* typography */
-
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1;
-}
-
-h1 {
-  font-size: 3em;
-  letter-spacing: -2px;
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-h2 {
-  font-size: 1.2em;
-  letter-spacing: -1px;
-  margin-bottom: 30px;
-  text-align: center;
-  font-weight: normal;
-  color: $light-gray;
-}
-
-p {
-  font-size: 1.1em;
-  line-height: 1.7em;
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
 }
 /* universal */
-
 body {
   padding-top: 60px;
 }
 
 section {
   overflow: auto;
+}
+
+.submit_button{
+  background-color: brown;
+  color: white;
 }
 
 textarea {
@@ -103,55 +46,100 @@ textarea {
   }
 }
 
-/* sidebar */
+/*template view*/
+#main_container{
+  min-height: 600px;
+  padding-top: 20px;
+}
 
-aside {
-  section.user_info {
-    margin-top: 20px;
+.navbar{
+  background-color: brown;
+  li{
+    float: left;
+     @include font-size(24px)
   }
-  section {
-    padding: 10px 0;
-    margin-top: 20px;
-    &:first-child {
-      border: 0;
-      padding-top: 0;
-    }
-    span {
-      display: block;
-      margin-bottom: 3px;
-      line-height: 1;
-    }
-    h1 {
-      font-size: 1.4em;
-      text-align: left;
-      letter-spacing: -1px;
-      margin-bottom: 3px;
-      margin-top: 0px;
+  .header_link{
+    color: white;
+      &:hover {
+        color: black;
+        text-decoration: none;
     }
   }
 }
 
-/* forms */
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid brown;
+  clear: both;
+  small{
+    float: left;
+  }
+}
 
+
+/*start view*/
+.info_wrapper{
+  border: 1px solid brown;
+  border-radius: 5px;
+  height: auto;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+#logo_image{
+  max-width: 100%;
+  height: auto;
+}
+
+.startview_logo{
+  margin-bottom: 20px;
+}
+
+/*specific user view*/
+
+.username_header{
+  font-size: 2.5vmin;
+  font-weight: 600;
+}
+.apikeys_list{
+  ul{
+    list-style-type: none;
+    margin-left: 0; 
+    margin-top:20px;
+    padding: 0;
+    li{
+      border-bottom: 1px solid brown; 
+      max-width:100%;
+      min-width:100%;
+    }
+  }
+  .application_name{
+    font-weight: 400;
+    font-size: 2vmin;
+  }
+  .application_key{
+    font-size: 1.1vmin;
+  }
+}
+
+/* forms */
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;
   margin-bottom: 15px;
   @include box_sizing;
 }
-
 input {
   height: auto !important;
 }
-
 #error_explanation {
-  color: red;
+  color: black;
   ul {
-    color: red;
-    margin: 0 0 30px 0;
+    color: black;
+    margin: 10px;
   }
 }
-
 .field_with_errors {
   @extend .has-error;
   .form-control {
@@ -159,51 +147,8 @@ input {
   }
 }
 
-/* apikeys */
-
-.apikeys {
-  list-style: none;
-  padding: 0;
-  li {
-    padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
-  }
-  .application_name {
-    margin-top: 5em;
-    padding-top: 0;
-  }
-  .application_key {
-    display: block;
-    margin-left: 60px;
-    img {
-      display: block;
-      padding: 5px 0;
-    }
-  }
-  .timestamp {
-    color: $gray-light;
-    display: block;
-    margin-left: 60px;
-  }
-}
-
-aside {
-  textarea {
-    height: 100px;
-    margin-bottom: 5px;
-  }
-}
-
-span.picture {
-  margin-top: 10px;
-  input {
-    border: 0;
-  }
-}
-
 /* miscellaneous */
-
-.debug_dump {
+debug_dump {
   clear: both;
   float: left;
   width: 100%;

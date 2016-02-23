@@ -1,13 +1,13 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="container">
-    <%= link_to "Birdspotter", root_path, id: "logo" %>
+<header class="navbar navbar-fixed-top col-xs-10 col-xs-offset-1 col-lg-8 col-lg-offset-2">
+  <div class="container col-xs-12 col-lg-12">
     <nav>
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-right">
         <% if logged_in? %>
-          <%= link_to "Logga ut", logout_path, method: "delete" %>
+          <li><%= link_to "Mitt konto", :controller => "users", :action => "show", :id => current_user%></li>
+          <li><%= link_to "Logga ut", logout_path%></li>
         <% else %>
-          <li><%= link_to "Registrera", signup_path %></li>
-          <li><%= link_to "Logga in", login_path %></li>
+          <li><%= link_to "Registrera", signup_path%></li>
+          <li><%= link_to "Logga in", root_url%></li>
         <% end %>
       </ul>
     </nav>

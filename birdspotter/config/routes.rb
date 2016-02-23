@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -8,11 +7,10 @@ Rails.application.routes.draw do
   root  'start#start'
   get    'login'   => 'login#new'
   post   'login'   => 'login#login'
-  delete 'logout'  => 'login#logout'
+  get 'logout'  => 'login#logout'
   get 'signup' => 'users#new'
   resources :users
-  resources :apikeys,          only: [:create, :destroy, :new]
-
+  resources :apikeys
 
 
   # Example of regular route:
