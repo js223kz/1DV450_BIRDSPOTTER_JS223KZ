@@ -1,6 +1,8 @@
 class ApikeysController < ApplicationController
-  before_action :logged_in?, only: [:create, :destroy]
+  before_action :logged_in_user, only: [:create, :destroy]
 
+  #create new apikey and save to currently
+  #logged in user
   def create
     @apikey = current_user.apikeys.build(apikey_params)
     if @apikey.save
@@ -15,14 +17,17 @@ class ApikeysController < ApplicationController
     end
   end
   
+  #delete apikey if user is user who created it
+  #or admin. Redirect to same page
   def destroy
+    if correct_user || current_user.admin
       @apikey = Apikey.find(params[:id])
       @apikey.destroy
       flash[:success] = "Applikationen är raderad."
-      
-      #this redirects user to page that
-      #issued delete
-      redirect_to request.referrer || root_url
+    end
+    #this redirects user to page that
+    #issued delete
+    redirect_to request.referrer || root_url
   end
   
   private

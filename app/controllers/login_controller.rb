@@ -4,7 +4,7 @@ class LoginController < ApplicationController
     @user = User.find_by(username: params[:login][:username].downcase)
     if  @user &&  @user.authenticate(params[:login][:password])
       log_in  @user
-      redirect_to  @user
+      redirect_to @user
     else
       flash.now[:danger] = 'Ogiltigt användarnamn/lösenord'
       render 'start/start'
