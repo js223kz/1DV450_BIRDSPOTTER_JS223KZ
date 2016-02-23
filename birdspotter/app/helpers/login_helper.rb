@@ -23,12 +23,4 @@ module LoginHelper
         session.delete(:user_id)
         @current_user = nil
     end
-    
-    def user_admin
-        @user = User.find_by(id: session[:user_id])
-        
-        if @user.admin
-            @admin_user ||= true
-        end
-    end
 end

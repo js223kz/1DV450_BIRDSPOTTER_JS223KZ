@@ -7,8 +7,7 @@ Rails.application.routes.draw do
   root  'start#start'
   get    'login'   => 'login#new'
   post   'login'   => 'login#login'
-  delete 'logout'  => 'login#logout'
-
+  get 'logout'  => 'login#logout'
   get 'signup' => 'users#new'
   resources :users
   resources :apikeys
