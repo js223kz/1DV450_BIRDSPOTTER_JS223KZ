@@ -12,7 +12,8 @@ class User < ActiveRecord::Base
                     too_long: 'E-post kan max vara 70 tecken.'
                 }, 
                 :format => { 
-                    with: VALID_EMAIL_REGEX 
+                    with: VALID_EMAIL_REGEX,
+                    :message => 'E-postadressen verkar vara i ogiltigt format.'
                 },
                 :uniqueness => { 
                     case_sensitive: false,
@@ -20,7 +21,7 @@ class User < ActiveRecord::Base
                     
                 }
     
-    has_secure_password
+    has_secure_password validations: false
     validates :password, 
                 :presence =>{
                     :message => 'Du måste fylla i ett lösenord'
