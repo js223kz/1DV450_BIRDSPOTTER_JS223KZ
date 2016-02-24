@@ -21,18 +21,13 @@ class UsersController < ApplicationController
   
   #users account page
   def show
-    #if logged_in?
-      @user = User.find(params[:id])
-      @apikey  = @user.apikeys.build
-        if current_user.admin
-          @apikeys = Apikey.all.paginate(page: params[:page], per_page: 5)
-        else
-          @apikeys = current_user.apikeys.paginate(page: params[:page], per_page: 5)
-        end
-    #else
-     # flash[:danger] = "Du måste logga in"
-     # redirect_to request.referrer || root_url
-    #end
+    @user = User.find(params[:id])
+    @apikey  = @user.apikeys.build
+    if current_user.admin
+      @apikeys = Apikey.all.paginate(page: params[:page], per_page: 5)
+    else
+      @apikeys = current_user.apikeys.paginate(page: params[:page], per_page: 5)
+    end
   end
   
   #use of strong params ensure that
