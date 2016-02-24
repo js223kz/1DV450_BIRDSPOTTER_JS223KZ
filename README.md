@@ -4,7 +4,7 @@ Ett Ruby on Rails/Angular projekt
 
 #### Del I skapa Api-nyckel
 
-** Publicerad applikation:**
+**Publicerad applikation:**
 https://birdspotterapi.herokuapp.com/
 
 ** För att köra applikationen lokalt:**
