@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   get    'login'   => 'login#new'
   post   'login'   => 'login#login'
   get 'logout'  => 'login#logout'
-  get 'signup' => 'developers#new'
-  resources :developers
+  get 'signup' => 'users#new'
+  resources :users
   resources :apikeys
 
 

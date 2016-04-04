@@ -1,0 +1,7 @@
+<%= form_for(@apikey) do |f| %>
+  <%= render 'shared/flash_message' %>
+  <div class="field">
+    <%= f.text_field :application_name, class: 'form-control', placeholder: "Ge din applikation ett namn" %>
+  </div>
+  <%= f.submit "Registrera en ny applikation", class: "btn submit_button" %>
+<% end %>

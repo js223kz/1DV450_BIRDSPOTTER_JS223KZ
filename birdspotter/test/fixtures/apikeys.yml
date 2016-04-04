@@ -6,15 +6,15 @@
 #
 one:
  application_name: minfantastiskaapp
- developer: one
+ user: one
  created_at: <%= 10.minutes.ago %>
 
 two:
  application_name: minmindrefantastiskaapp
- developer: two
+ user: two
  created_at: <%= 3.years.ago %>
 
 latest:
  application_name: superappen
- developer: three
+ user: three
  created_at: <%= Time.zone.now %>

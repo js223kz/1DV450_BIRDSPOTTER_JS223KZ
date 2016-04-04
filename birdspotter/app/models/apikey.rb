@@ -1,5 +1,5 @@
 class Apikey < ActiveRecord::Base
-    belongs_to :developer
+    belongs_to :user
     before_create { self.application_key = SecureRandom.hex(32) }
     default_scope -> { order(created_at: :desc) }
     
