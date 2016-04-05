@@ -1,4 +1,3 @@
-== README
 
 # 1DV450_BIRDSPOTTER_JS223KZ
 Ett Ruby on Rails/Angular projekt
