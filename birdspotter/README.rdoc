@@ -1,28 +1,23 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# 1DV450_BIRDSPOTTER_JS223KZ
+Ett Ruby on Rails/Angular projekt
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+#### Del I skapa Api-nyckel
+
+**Publicerad applikation:**</br>
+https://birdspotterapi.herokuapp.com/
+
+**För att köra applikationen lokalt:**</br>
+Kör bundle install för att installera alla gems</br>
+  1. Klona repot</br>
+  2. rake db:migrate</br>
+  3. rake db:setup</br>
+
+**För att testa applikationen som admin**</br>
+användarnamn: js@phpfan.se</br>
+lösenord: loveit</br>
+
+Registrera dig som användare för att testa applikationen som en "vanlig" användare.
+
