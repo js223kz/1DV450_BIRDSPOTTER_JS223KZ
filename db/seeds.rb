@@ -10,6 +10,20 @@ user1 = User.create(username: "info@webbteknik.se", password: "hejsanhoppsan", p
 user2 = User.create(username: "info@aspnet.com", password: "jättetråkigt", password_confirmation: "jättetråkigt")
 user3= User.create(username: "js@phpfan.se", password: "loveit", password_confirmation: "loveit", admin:true)
 
-user1.apikeys << Apikey.create(application_key: "kjasgfuegfugfjbvnbhvdg6762811ghjfew", application_name: "minfantastiskaapp")
-user2.apikeys << Apikey.create(application_key: "qkOE2IU484IHRWJKRAJFABJ754FBZKVDGFJ", application_name: "minmindrefantastiskaapp")
-user3.apikeys << Apikey.create(application_key: "qkOE2IU484IHRWJKRAafdqrtdwd2e142eqr", application_name: "superappen")
+user1.apikeys << Apikey.create(application_name: "minfantastiskaapp")
+user2.apikeys << Apikey.create(application_name: "minmindrefantastiskaapp")
+user3.apikeys << Apikey.create(application_name: "superappen")
+
+
+Api::V1::Bird.create(bird_name: "Aftonfalk", latin_name: "Falco vespertinus", regularity: "R")
+Api::V1::Bird.create(bird_name: "Alfågel", latin_name: "Clangula hyemalis", regularity: "B")
+Api::V1::Bird.create(bird_name: "Alförrädare", latin_name: "Polysticta stelleri", regularity: "R")
+Api::V1::Bird.create(bird_name: "Alkekung", latin_name: "Alle alle", regularity: "R")
+Api::V1::Bird.create(bird_name: "Amerikansk kopparand", latin_name: "Oxyura jamaicensis", regularity: "b")
+Api::V1::Bird.create(bird_name: "Amerikansk kricka", latin_name: "Anas carolinensis", regularity: "R")
+Api::V1::Bird.create(bird_name: "Backsvala", latin_name: "Riparia riparia", regularity: "B")
+Api::V1::Bird.create(bird_name: "Bergand", latin_name: "Aythya marila", regularity: "B")
+Api::V1::Bird.create(bird_name: "Bergfink", latin_name: "Fringilla montifringilla", regularity: "B")
+Api::V1::Bird.create(bird_name: "Berglärka", latin_name: "Eremophila alpestris", regularity: "B")
+
+

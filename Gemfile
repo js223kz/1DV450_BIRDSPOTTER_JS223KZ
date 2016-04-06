@@ -6,6 +6,8 @@ ruby "2.3.0"
 gem 'rails', '4.2.5.1'
 gem 'bootstrap-sass',       '3.2.0.0'
 gem 'mysql2'
+gem 'active_model_serializers', '~> 0.8.3'
+gem 'active_hash_relation'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

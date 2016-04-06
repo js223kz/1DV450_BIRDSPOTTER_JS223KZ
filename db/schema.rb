@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160204152749) do
+ActiveRecord::Schema.define(version: 20160406105228) do
+
+  create_table "api_v1_birds", force: :cascade do |t|
+    t.string   "bird_name"
+    t.string   "latin_name"
+    t.string   "regularity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "apikeys", force: :cascade do |t|
     t.string   "application_name"

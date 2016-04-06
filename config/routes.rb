@@ -11,6 +11,14 @@ Rails.application.routes.draw do
   get 'signup' => 'users#new'
   resources :users
   resources :apikeys
+  
+  #api
+  namespace :api do
+    namespace :v1 do
+      get 'birds'   => 'birds#index'
+    end
+  end
+
 
 
   # Example of regular route:
