@@ -32,5 +32,20 @@ Api::V1::Bird.create(bird_name: "Björktrast", latin_name: "Turdus pilaris", reg
 Api::V1::Bird.create(bird_name: "Blå kärrhök", latin_name: "Circus cyaneus", regularity: "B")
 Api::V1::Bird.create(bird_name: "Blåhake", latin_name: "Luscinia svecica", regularity: "B")
 Api::V1::Bird.create(bird_name: "Blåmes", latin_name: "Parus caeruleus", regularity: "B")
+Api::V1::Bird.create(bird_name: "Bläsand", latin_name: "Anas penelope", regularity: "B")
+Api::V1::Bird.create(bird_name: "Bläsgås", latin_name: "Anser albifrons", regularity: "M")
+Api::V1::Bird.create(bird_name: "Bofink", latin_name: "Fringilla coelebs", regularity: "B")
+Api::V1::Bird.create(bird_name: "Brandkronad kungsfågel", latin_name: "Regulus ignicapillus", regularity: "R")
+Api::V1::Bird.create(bird_name: "Brednäbbad simsnäppa", latin_name: "Phalaropus fulicarius", regularity: "R")
+Api::V1::Bird.create(bird_name: "Bredstjärtad labb", latin_name: "Stercorarius pomarinus", regularity: "R")
+Api::V1::Bird.create(bird_name: "Brun glada", latin_name: "Milvus migrans", regularity: "b")
+Api::V1::Bird.create(bird_name: "Brun kärrhök", latin_name: "Circus aeruginosus", regularity: "B")
+Api::V1::Bird.create(bird_name: "Brunand", latin_name: "Aythya ferina", regularity: "B")
+Api::V1::Bird.create(bird_name: "Brushane", latin_name: "Philomachus pugnax", regularity: "B")
+Api::V1::Bird.create(bird_name: "Buskskvätta", latin_name: "Saxicola rubetra", regularity: "B")
+Api::V1::Bird.create(bird_name: "Busksångare", latin_name: "Acrocephalus dumetorum", regularity: "R")
+Api::V1::Bird.create(bird_name: "Bändelkorsnäbb", latin_name: "Loxia leucoptera", regularity: "R")
+Api::V1::Bird.create(bird_name: "Citronärla", latin_name: "Motacilla citreola", regularity: "R")
+
 
 

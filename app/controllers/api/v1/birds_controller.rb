@@ -7,6 +7,7 @@ class Api::V1::BirdsController < ApplicationController
     
     def index
         birds = Api::V1::Bird.all
+
         if params[:regularity].blank?
             render json: {
             totalCount: birds.count,
