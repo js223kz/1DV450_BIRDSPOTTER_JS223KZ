@@ -2,8 +2,6 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  #http_basic_authenticate_with application_key: "kjasgfuegfugfjbvnbhvdg6762811ghjfew"
-  before_filter :restrict_access
   include LoginHelper
   
   
@@ -17,8 +15,13 @@ class ApplicationController < ActionController::Base
   end
   
   def restrict_access
-    apikey = Apikey.find_by(application_key: params[:key])
-    head :unauthorized, text: "Valid apikey is required to interact with api. Get a key at: " unless apikey
+    authenticate_or_request_with_http_token do|token, options|
+    Apikey.exists?(application_key: token)
+    #render json: {
+     #   Apikeys: Apikey.all
+     # }
+    end
+    #apikey = Apikey.find_by(application_key: params[:key])
+    #head :unauthorized, text: "Valid apikey is required to interact with api. Get a key at: " unless apikey
   end
-
 end

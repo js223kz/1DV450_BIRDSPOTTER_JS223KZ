@@ -25,5 +25,12 @@ Api::V1::Bird.create(bird_name: "Backsvala", latin_name: "Riparia riparia", regu
 Api::V1::Bird.create(bird_name: "Bergand", latin_name: "Aythya marila", regularity: "B")
 Api::V1::Bird.create(bird_name: "Bergfink", latin_name: "Fringilla montifringilla", regularity: "B")
 Api::V1::Bird.create(bird_name: "Berglärka", latin_name: "Eremophila alpestris", regularity: "B")
+Api::V1::Bird.create(bird_name: "Berguv", latin_name: "Bubo bubo", regularity: "B")
+Api::V1::Bird.create(bird_name: "Bivråk", latin_name: "Pernis apivorus", regularity: "B")
+Api::V1::Bird.create(bird_name: "Biätare", latin_name: "Merops apiaster", regularity: "R")
+Api::V1::Bird.create(bird_name: "Björktrast", latin_name: "Turdus pilaris", regularity: "B")
+Api::V1::Bird.create(bird_name: "Blå kärrhök", latin_name: "Circus cyaneus", regularity: "B")
+Api::V1::Bird.create(bird_name: "Blåhake", latin_name: "Luscinia svecica", regularity: "B")
+Api::V1::Bird.create(bird_name: "Blåmes", latin_name: "Parus caeruleus", regularity: "B")
 
 
