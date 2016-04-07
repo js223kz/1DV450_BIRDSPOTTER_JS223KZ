@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one:
+  id: 1
+  user_name: Johanna
+  email: info@superkatten.se
+  password_digest: <%= Birdspotter.digest('superkatten') %>
+
+two:
+  id: 2
+  user_name: Szepanski
+  email: info@szepanski.se
+  password_digest: <%= Birdspotter.digest('lösenord') %>
+
+three:
+  id: 3
+  user_name: Marcus
+  email: info@marcus.se
+  password_digest: <%= Birdspotter.digest('hallojsa') %>
