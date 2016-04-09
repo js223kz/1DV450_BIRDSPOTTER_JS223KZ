@@ -31,7 +31,7 @@ class ApikeyTest < ActiveSupport::TestCase
     assert_not @apikey.valid?
   end
   
-  test "Latest apikey should first in order" do
+  test "Latest apikey should be first in order" do
     assert_equal apikeys(:latest), Apikey.first
   end
 end
