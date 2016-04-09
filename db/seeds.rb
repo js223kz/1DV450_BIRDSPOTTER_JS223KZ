@@ -15,6 +15,11 @@ bird_spotter1 = Api::V1::Birdspotter.create(user_name: "Marcus", email: "info@ma
 bird_spotter2 = Api::V1::Birdspotter.create(user_name: "Szepanski", email: "info@szepanski.se", password: "lösenord", password_confirmation:"lösenord")
 bird_spotter3 = Api::V1::Birdspotter.create(user_name: "Johanna", email: "info@superkatten.se", password: "superkatten", password_confirmation:"superkatten")
 
+bird_spotter1.spots << Api::V1::Spot.create(latitude: 55.399771, longitude: 12.869676)
+bird_spotter1.spots << Api::V1::Spot.create(latitude: 55.40388, longitude: 12.825587)
+bird_spotter2.spots << Api::V1::Spot.create(latitude: 55.408619, longitude: 12.841669)
+bird_spotter3.spots << Api::V1::Spot.create(latitude: 55.767888, longitude: 13.518407)
+
 Api::V1::Bird.create(bird_name: "Aftonfalk", latin_name: "Falco vespertinus", regularity: "R")
 Api::V1::Bird.create(bird_name: "Alfågel", latin_name: "Clangula hyemalis", regularity: "B")
 Api::V1::Bird.create(bird_name: "Alförrädare", latin_name: "Polysticta stelleri", regularity: "R")
@@ -46,6 +51,13 @@ Api::V1::Bird.create(bird_name: "Buskskvätta", latin_name: "Saxicola rubetra", 
 Api::V1::Bird.create(bird_name: "Busksångare", latin_name: "Acrocephalus dumetorum", regularity: "R")
 Api::V1::Bird.create(bird_name: "Bändelkorsnäbb", latin_name: "Loxia leucoptera", regularity: "R")
 Api::V1::Bird.create(bird_name: "Citronärla", latin_name: "Motacilla citreola", regularity: "R")
+Api::V1::Bird.create(bird_name: "Dalripa", latin_name: "Lagopus lagopus", regularity: "B")
+Api::V1::Bird.create(bird_name: "Dammsnäppa", latin_name: "Tringa stagnatilis", regularity: "R")
+Api::V1::Bird.create(bird_name: "Domherre", latin_name: "Pyrrhula pyrrhula", regularity: "B")
+Api::V1::Bird.create(bird_name: "Drillsnäppa", latin_name: "Actitis hypoleucos", regularity: "B")
+Api::V1::Bird.create(bird_name: "Dubbelbeckasin", latin_name: "Gallinago media", regularity: "B")
+Api::V1::Bird.create(bird_name: "Dubbeltrast", latin_name: "Turdus viscivorus", regularity: "B")
+Api::V1::Bird.create(bird_name: "Duvhök", latin_name: "Accipiter gentilis", regularity: "B")
 
 
 

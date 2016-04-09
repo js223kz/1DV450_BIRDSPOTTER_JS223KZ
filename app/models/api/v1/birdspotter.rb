@@ -1,6 +1,5 @@
 class Api::V1::Birdspotter < ActiveRecord::Base
-    include ActiveModel::Serialization
-    
+    has_many :spots
     before_save { self.email = email.downcase }
     before_create { self.user_token = SecureRandom.hex(32) }
     

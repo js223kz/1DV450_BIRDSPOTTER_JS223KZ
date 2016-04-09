@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160407133822) do
+ActiveRecord::Schema.define(version: 20160409110624) do
 
   create_table "api_v1_birds", force: :cascade do |t|
     t.string   "bird_name"
@@ -29,6 +29,17 @@ ActiveRecord::Schema.define(version: 20160407133822) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
   end
+
+  create_table "api_v1_spots", force: :cascade do |t|
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "address"
+    t.integer  "birdspotter_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "api_v1_spots", ["birdspotter_id"], name: "index_api_v1_spots_on_birdspotter_id"
 
   create_table "apikeys", force: :cascade do |t|
     t.string   "application_name"
