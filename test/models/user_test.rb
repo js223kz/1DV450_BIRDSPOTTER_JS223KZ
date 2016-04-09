@@ -2,10 +2,7 @@ require 'test_helper'
 
 
 class UserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
-  
+ 
   def setup
     @user = User.new(username: "JS@powerapp.se", admin:"", password: "foobar", password_confirmation: "foobar")
   end

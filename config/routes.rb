@@ -15,8 +15,10 @@ Rails.application.routes.draw do
   #api
   namespace :api do
     namespace :v1 do
-      get 'birds'   => 'birds#index'
-      get 'birds/:id' => 'birds#show'
+      get 'birds'   => 'birds#birds'
+      get 'birds/:id' => 'birds#bird'
+      get 'birdspotters' => 'birdspotters#birdspotters'
+      get 'birdspotters/:id' => 'birdspotters#birdspotter'
     end
   end
 

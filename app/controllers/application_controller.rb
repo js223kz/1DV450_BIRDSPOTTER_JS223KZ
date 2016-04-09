@@ -39,4 +39,8 @@ class ApplicationController < ActionController::Base
       format.json { render json: { error: '404, not found' }, status: 404 }
     end
   end
+  
+  def destroy_session
+    request.session_options[:skip] = true
+  end
 end

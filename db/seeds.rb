@@ -12,8 +12,8 @@ user3.apikeys << Apikey.create(application_name: "superappen")
 
 
 bird_spotter1 = Api::V1::Birdspotter.create(user_name: "Marcus", email: "info@marcus.se", password: "hallojsa", password_confirmation:"hallojsa")
-bird_spotter1 = Api::V1::Birdspotter.create(user_name: "Szepanski", email: "info@szepanski.se", password: "lösenord", password_confirmation:"lösenord")
-bird_spotter1 = Api::V1::Birdspotter.create(user_name: "Johanna", email: "info@superkatten.se", password: "superkatten", password_confirmation:"hejsanhoppsan")
+bird_spotter2 = Api::V1::Birdspotter.create(user_name: "Szepanski", email: "info@szepanski.se", password: "lösenord", password_confirmation:"lösenord")
+bird_spotter3 = Api::V1::Birdspotter.create(user_name: "Johanna", email: "info@superkatten.se", password: "superkatten", password_confirmation:"superkatten")
 
 Api::V1::Bird.create(bird_name: "Aftonfalk", latin_name: "Falco vespertinus", regularity: "R")
 Api::V1::Bird.create(bird_name: "Alfågel", latin_name: "Clangula hyemalis", regularity: "B")

@@ -5,7 +5,7 @@ class Api::V1::BirdsController < ApplicationController
     #required valid apikey to interact with api
     before_filter :restrict_access
     
-    def index
+    def birds
         birds = Api::V1::Bird.all
 
         if params[:regularity].blank?
@@ -17,23 +17,14 @@ class Api::V1::BirdsController < ApplicationController
           
           params[:regularity].tr(' ','').split(',').each do |keyword|
             birds = Api::V1::Bird.where("regularity like ?", "%#{keyword}%") 
-            render json: {
-                totalCount: birds.count,
-                birds: birds
-            }
+            render json: birds, meta: {totalCount: birds.count}
           end
        
         end
     end
     
-    def show
+    def bird
         bird = Api::V1::Bird.find(params[:id])
-        render json: {
-            bird: bird
-        } 
-    end
-    
-    def destroy_session
-    request.session_options[:skip] = true
+        render json: bird
     end
 end
