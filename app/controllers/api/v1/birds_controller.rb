@@ -3,7 +3,7 @@ class Api::V1::BirdsController < ApplicationController
     before_action :destroy_session
     
     #required valid apikey to interact with api
-    before_filter :restrict_access
+    #before_filter :restrict_access
     
     def birds
         birds = Api::V1::Bird.all

@@ -19,6 +19,9 @@ Rails.application.routes.draw do
       get 'birds/:id' => 'birds#bird'
       get 'birdspotters' => 'birdspotters#birdspotters'
       get 'birdspotters/:id' => 'birdspotters#birdspotter'
+      get 'spots'   => 'spots#spots'
+      get 'spots/:id' => 'spots#spot'
+      post 'spots' => 'spots#create'
     end
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160409110624) do
+ActiveRecord::Schema.define(version: 20160411083014) do
 
   create_table "api_v1_birds", force: :cascade do |t|
     t.string   "bird_name"
@@ -20,6 +20,13 @@ ActiveRecord::Schema.define(version: 20160409110624) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "api_v1_birds_spots", id: false, force: :cascade do |t|
+    t.integer "bird_id"
+    t.integer "spot_id"
+  end
+
+  add_index "api_v1_birds_spots", ["bird_id", "spot_id"], name: "index_api_v1_birds_spots_on_bird_id_and_spot_id"
 
   create_table "api_v1_birdspotters", force: :cascade do |t|
     t.string   "user_name",       limit: 30
@@ -33,7 +40,6 @@ ActiveRecord::Schema.define(version: 20160409110624) do
   create_table "api_v1_spots", force: :cascade do |t|
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "address"
     t.integer  "birdspotter_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
