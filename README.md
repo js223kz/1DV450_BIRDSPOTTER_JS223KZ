@@ -21,7 +21,7 @@ lösenord: loveit</br>
 Registrera dig som användare för att testa applikationen som en "vanlig" användare.
 
 
-#### Del I använda API:et
+#### Del II använda API:et
 
 **Publicerad applikation:**</br>
 https://birdspotterdev.herokuapp.com/
