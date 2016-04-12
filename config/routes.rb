@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post   'login'   => 'login#login'
   get 'logout'  => 'login#logout'
   get 'signup' => 'users#new'
+   get :token, controller: 'application'
   resources :users
   resources :apikeys
   
@@ -21,7 +22,7 @@ Rails.application.routes.draw do
       post 'spots' => 'spots#create'
       delete 'spots/:id' => 'spots#destroy'
       put 'spots/:id' => 'spots#update'
-      get 'authenticate' => 'token#authenticate'
+     
     end
   end
 end
