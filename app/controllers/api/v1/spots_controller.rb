@@ -1,8 +1,29 @@
 class Api::V1::SpotsController < ApplicationController
     
     def spots
-        spots = Api::V1::Spot.all
-        render json: spots, meta: {totalCount: spots.count}
+        
+        @birdspotter = params[:birdspotter]
+        if @birdspotter.blank? 
+            render json: { 
+                status: 200, 
+                totalCount: spots.count, 
+                spots: ActiveModel::ArraySerializer.new(Api::V1::Spot.all, each_serializer: Api::V1::SpotSerializer) 
+            }
+        else
+            if Api::V1::Birdspotter.exists?(@birdspotter)
+                spots = Api::V1::Spot.where(birdspotter_id: @birdspotter)
+                render json: { 
+                    status: 200, 
+                    totalCount: spots.count,
+                    spots: ActiveModel::ArraySerializer.new(spots, each_serializer: Api::V1::SpotSerializer) 
+                }
+            else
+                render json: {
+                    error: 404,
+                    message: "Birdspotter with that id doesn't exist" 
+                } 
+            end
+        end
     end
     
     def spot
@@ -13,16 +34,16 @@ class Api::V1::SpotsController < ApplicationController
     def create
         if params[:birdspotter].blank?
             render json: {
-                error: 401,
-                text: "Creator id must be present." 
+                error: 400,
+                message: "Creator id must be present." 
             }
             return
         end
         
         if params[:bird].blank?
             render json: {
-                error: 401,
-                text: "A Spot must have at least one bird." 
+                error: 400,
+                message: "A Spot must have at least one bird." 
             }
             return
         end
@@ -40,26 +61,75 @@ class Api::V1::SpotsController < ApplicationController
                    else
                         render json: {
                             status: 404,
-                            errors:  "One or several bird id:s doesn't exist."
+                            message:  "One or several bird id:s doesn't exist."
                         } 
                         return
                     end
                 end
             else
                 render json: {
-                errors:  @spot.errors.full_messages 
+                    error: 400,
+                    message:  @spot.errors.full_messages 
                 }
                 return
             end
         else
            render json: {
                 error: 404,
-                text: "Birdspotter with that id not found" 
+                message: "Birdspotter with that id not found" 
             }
             return
         end
-        render json: @spot, meta:{status: 201, text: "Spot was succesfully created"}
-            
-            
+        render json: { 
+            status: 201, 
+            message: "Spot was succesfully created", 
+            spots: Api::V1::SpotSerializer.new(@spot) 
+        }
+    end
+    
+    def destroy
+        if Api::V1::Spot.exists?(params[:id])
+            @spot = Api::V1::Spot.find(params[:id])
+            @spot.destroy
+            render json: {
+                status: 204,
+                message: "Spot was deleted"
+            }
+        else
+           render json: {
+                status: 404,
+                message: "Spot with that id not found"
+            } 
+        end
+    end
+    
+    def update
+      @spot = Api::V1::Spot.find(params[:id])
+      @spot.birds = []
+        if @spot.nil?  
+            render json: {
+                status: 404,
+                message: "Spot with that id not found"
+            } 
+        else
+            params[:bird].tr(' ','').split(',').each do |bird_id|
+                if Api::V1::Bird.exists?(bird_id)
+                    @bird = Api::V1::Bird.find_by_id(bird_id)
+                    @spot.birds.push(@bird)
+               else
+                    render json: {
+                        status: 404,
+                        message:  "One or several bird id:s doesn't exist."
+                    } 
+                    return
+                end
+            end
+            @spot.update_attributes(params.permit(:latitude, :longitude, :birds => @spot.birds))
+            render json: {
+                status: 200,
+                message: "Spot has been updated",
+                spots: Api::V1::SpotSerializer.new(@spot) 
+            } 
+        end
     end
 end
