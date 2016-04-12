@@ -63,7 +63,7 @@ class Api::V1::SpotsController < ApplicationController
         spot = Api::V1::Spot.find(params[:id])
         render json: {
             message: "200 OK",
-            spot: Api::V1::BSpotSerializer.new(spot) 
+            spot: Api::V1::SpotSerializer.new(spot), 
         },
         status: 200
     end
