@@ -5,26 +5,38 @@ class Api::V1::BirdsController < ApplicationController
     #required valid apikey to interact with api
     #before_filter :restrict_access
     
+    #get list of birds
     def birds
-        birds = Api::V1::Bird.all
+        @birds = Api::V1::Bird.all
+        @serializer = ActiveModel::ArraySerializer
 
+        #if regularity is not defined get all birds
         if params[:regularity].blank?
-            render json: {
-            totalCount: birds.count,
-            birds: birds
-          }
+            render json: { 
+                status: 200, 
+                totalCount: @birds.count,
+                birds: @serializer.new(@birds, each_serializer: Api::V1::BirdSerializer) 
+            }
+            
+        #if regularity is defined get birds based on regularity
         else
-          
-          params[:regularity].tr(' ','').split(',').each do |keyword|
-            birds = Api::V1::Bird.where("regularity like ?", "%#{keyword}%") 
-            render json: birds, meta: {totalCount: birds.count}
-          end
-       
+            @regularity = params[:regularity].split(",")
+            @birds = @birds.where(regularity: @regularity)
+            render json: { 
+                status: 200, 
+                totalCount: @birds.count,
+                birds: @serializer.new(@birds, each_serializer: Api::V1::BirdSerializer) 
+            }
         end
     end
     
+    
+    #Get bird by id
     def bird
         bird = Api::V1::Bird.find(params[:id])
-        render json: bird
+        render json: {
+            status: 200,
+            bird: Api::V1::BirdSerializer.new(bird) 
+        } 
     end
 end

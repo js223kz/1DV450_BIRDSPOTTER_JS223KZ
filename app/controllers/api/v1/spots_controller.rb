@@ -3,25 +3,49 @@ class Api::V1::SpotsController < ApplicationController
     def spots
         
         @birdspotter = params[:birdspotter]
-        if @birdspotter.blank? 
+        @bird = params[:bird]
+        @spots = Api::V1::Spot.all
+        @birds = Api::V1::Bird.all
+        
+        if @birdspotter.blank? && @bird.blank?
             render json: { 
                 status: 200, 
-                totalCount: spots.count, 
-                spots: ActiveModel::ArraySerializer.new(Api::V1::Spot.all, each_serializer: Api::V1::SpotSerializer) 
+                totalCount: @spots.count, 
+                spots: ActiveModel::ArraySerializer.new(@spots, each_serializer: Api::V1::SpotSerializer) 
             }
-        else
-            if Api::V1::Birdspotter.exists?(@birdspotter)
-                spots = Api::V1::Spot.where(birdspotter_id: @birdspotter)
+            return
+        end
+        
+        if !@birdspotter.blank? && @bird.blank?
+            if @spots.exists?(@birdspotter)
+                @spots = @spots.where(birdspotter_id: @birdspotter)
                 render json: { 
                     status: 200, 
-                    totalCount: spots.count,
-                    spots: ActiveModel::ArraySerializer.new(spots, each_serializer: Api::V1::SpotSerializer) 
+                    totalCount: @spots.count,
+                    spots: ActiveModel::ArraySerializer.new(@spots, each_serializer: Api::V1::SpotSerializer) 
                 }
             else
                 render json: {
                     error: 404,
-                    message: "Birdspotter with that id doesn't exist" 
+                    message: "There are no spots created by a birdspotter with that id" 
                 } 
+            end
+        end
+        
+        if @birdspotter.blank? && !@bird.blank?
+            if @birds.exists?(@bird)
+                @bird = Api::V1::Bird.find(@bird)
+                @spots = @bird.spots
+                render json: { 
+                        status: 200, 
+                        totalCount: @spots.count,
+                        spots: ActiveModel::ArraySerializer.new(@spots, each_serializer: Api::V1::SpotSerializer) 
+                }
+            else
+                render json: {
+                    status: 404,
+                    message: "There are no spots that contains a bird with that id" 
+                }   
             end
         end
     end
