@@ -139,9 +139,10 @@ class Api::V1::SpotsController < ApplicationController
             @spot = Api::V1::Spot.find(params[:id])
             @spot.destroy
             render json: {
+                status: "204 No Content",
                 message: "Spot was deleted"
-            },
-            status: 204
+            }
+            
         else
            render json: {
                 message: "Spot with that id not found"

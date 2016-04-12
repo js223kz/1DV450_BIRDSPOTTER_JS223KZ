@@ -8,7 +8,7 @@ class Api::V1::BirdspottersController < ApplicationController
         birdspotters = Api::V1::Birdspotter.all
         render json: {
             message: "200 OK",
-            totalCount: spots.count,
+            totalCount: birdspotters.count,
             spots: ActiveModel::ArraySerializer.new(birdspotters, each_serializer: Api::V1::BirdspotterSerializer)
         }, 
         status: 200
