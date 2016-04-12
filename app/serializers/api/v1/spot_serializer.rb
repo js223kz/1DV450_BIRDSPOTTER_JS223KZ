@@ -1,7 +1,7 @@
 class Api::V1::SpotSerializer < ActiveModel::Serializer
   attributes :id, :latitude, :longitude, :birdspotterId, :birdspotterHref, :createdAt, :updatedAt
   
-    has_many :birds, serializer: BirdSerializer
+    has_many :birds
     
     def birdspotterId
         object.birdspotter_id

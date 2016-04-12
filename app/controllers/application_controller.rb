@@ -26,7 +26,9 @@ class ApplicationController < ActionController::Base
         birdspotter = Api::V1::Birdspotter.find_by(email: email)
         
         if birdspotter && birdspotter.authenticate(password)
-          render json: { token: birdspotter.user_token }
+          render json: { 
+            token: birdspotter.user_token 
+          }
         else
           render json: 
           {
