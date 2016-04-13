@@ -73,7 +73,8 @@ https://github.com/js223kz/1DV450_BIRDSPOTTER_JS223KZ/wiki
   3. rake db:migrate</br>
   4. rake db:setup</br>
 
-Tänk bara på att gå in och hämta en ny apinyckel då dessa förnyas vid en db:setup
+Tänk bara på att gå in och hämta en ny apinyckel då dessa förnyas vid en db:setup</br>
+Token att testa med: 852160265f8121a5369d34662600dccce36569c3a645bd20fbcbdf154780a5f3
 
 
 
