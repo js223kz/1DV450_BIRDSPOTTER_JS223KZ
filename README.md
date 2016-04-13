@@ -9,10 +9,11 @@ Ett Ruby on Rails/Angular projekt
 https://birdspotterdev.herokuapp.com/
 
 **För att köra applikationen lokalt:**</br>
-Kör bundle install för att installera alla gems</br>
+
   1. Klona repot</br>
-  2. rake db:migrate</br>
-  3. rake db:setup</br>
+  2. Kör bundle install för att installera alla gems</br>
+  3. rake db:migrate</br>
+  4. rake db:setup</br>
 
 **För att testa applikationen som admin**</br>
 användarnamn: js@phpfan.se</br>
