@@ -70,9 +70,9 @@ class Api::V1::SpotsController < ApplicationController
     
     #create a new spot
     def create
-        
+        json_params = ActionController::Parameters.new(JSON.parse(request.body.read))
         #birdspotter id must be present
-        if params[:birdspotter].blank?
+        if  json_params[:birdspotter].blank?
             render json: {
                message: "Creator id must be present." 
             },
@@ -81,7 +81,7 @@ class Api::V1::SpotsController < ApplicationController
         end
         
         #at least one bird must be present
-        if params[:bird].blank?
+        if  json_params[:bird].blank?
             render json: {
                 message: "A Spot must have at least one bird." 
             },
@@ -90,18 +90,18 @@ class Api::V1::SpotsController < ApplicationController
         end
         
         #check if birdspotter exists
-        if Api::V1::Birdspotter.exists?(params[:birdspotter])
+        if Api::V1::Birdspotter.exists?(json_params[:birdspotter])
             
             #if exists find birdspotter
-            @birdspotter = Api::V1::Birdspotter.find_by_id(params[:birdspotter])
+            @birdspotter = Api::V1::Birdspotter.find_by_id( json_params[:birdspotter])
             
             #create a new spot and append to birdspotter
-            @spot = Api::V1::Spot.create(:latitude => params[:latitude], :longitude => params[:longitude])
+            @spot = Api::V1::Spot.create(:latitude =>  json_params[:latitude], :longitude =>  json_params[:longitude])
             if @spot.save
                 @birdspotter.spots << @spot
                 
                 #iterate through all birds and append each bird to newly created spot
-                params[:bird].tr(' ','').split(',').each do |bird_id|
+                 json_params[:bird].tr(' ','').split(',').each do |bird_id|
                     if Api::V1::Bird.exists?(bird_id)
                         @bird = Api::V1::Bird.find_by_id(bird_id)
                         @spot.birds << @bird
@@ -139,15 +139,16 @@ class Api::V1::SpotsController < ApplicationController
             @spot = Api::V1::Spot.find(params[:id])
             @spot.destroy
             render json: {
-                status: "204 No Content",
                 message: "Spot was deleted"
-            }
+            },
+            status: 204
             
         else
            render json: {
                 message: "Spot with that id not found"
             },
             status: 404
+            
         end
     end
     
