@@ -71,8 +71,9 @@ class Api::V1::SpotsController < ApplicationController
     #create a new spot
     def create
         json_params = ActionController::Parameters.new(JSON.parse(request.body.read))
+        spot = json_params.spot
         #birdspotter id must be present
-        if  json_params[:birdspotter].blank?
+        if  spot[:birdspotter].blank?
             render json: {
                message: "Creator id must be present." 
             },
