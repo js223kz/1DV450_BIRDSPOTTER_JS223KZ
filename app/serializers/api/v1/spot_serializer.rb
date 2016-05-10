@@ -8,7 +8,7 @@ class Api::V1::SpotSerializer < ActiveModel::Serializer
     end
     
     def birdspotterHref
-        "https://birdspotter-apikey-js223kz.c9users.io/api/v1/birdspotter/" + object.birdspotter_id.to_s() 
+        "https://birdspotterdev.herokuapp.com/api/v1/birdspotter/" + object.birdspotter_id.to_s() 
     end
   
     def createdAt
@@ -20,6 +20,6 @@ class Api::V1::SpotSerializer < ActiveModel::Serializer
   end
   
   def href
-      "https://birdspotter-apikey-js223kz.c9users.io/api/v1/birds/" + object.id.to_s() 
+      "https://birdspotterdev.herokuapp.com/api/v1/birds/" + object.id.to_s() 
   end
 end
