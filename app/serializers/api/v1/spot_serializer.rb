@@ -16,7 +16,7 @@ class Api::V1::SpotSerializer < ActiveModel::Serializer
     end
 
   def updatedAt
-    object.updated_at.in_time_zone.iso8601 if object.created_at
+    object.updated_at.in_time_zone.iso8601 if object.updated_at
   end
   
   def href
