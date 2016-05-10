@@ -161,7 +161,7 @@ class Api::V1::SpotsController < ApplicationController
             status: 404
         else
             #iterate through all birds
-            params[:bird].tr(' ','').split(',').each do |bird_id|
+            spot_params[:bird].tr(' ','').split(',').each do |bird_id|
                 if Api::V1::Bird.exists?(bird_id)
                     @bird = Api::V1::Bird.find_by_id(bird_id)
                     @spot.birds.push(@bird)
@@ -173,7 +173,7 @@ class Api::V1::SpotsController < ApplicationController
                     return
                 end
             end
-            @spot.update_attributes(params.permit(:latitude, :longitude, :birds => @spot.birds))
+            @spot.update_attributes(spot_params.permit(:latitude, :longitude, :birds => @spot.birds))
             render json: {
                 message: "Spot has been updated",
                 spots: Api::V1::SpotSerializer.new(@spot) 
