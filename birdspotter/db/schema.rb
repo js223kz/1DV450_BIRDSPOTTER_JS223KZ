@@ -11,7 +11,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160204152749) do
+ActiveRecord::Schema.define(version: 20160411083014) do
+
+  create_table "api_v1_birds", force: :cascade do |t|
+    t.string   "bird_name"
+    t.string   "latin_name"
+    t.string   "regularity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "api_v1_birds_spots", id: false, force: :cascade do |t|
+    t.integer "bird_id"
+    t.integer "spot_id"
+  end
+
+  add_index "api_v1_birds_spots", ["bird_id", "spot_id"], name: "index_api_v1_birds_spots_on_bird_id_and_spot_id"
+
+  create_table "api_v1_birdspotters", force: :cascade do |t|
+    t.string   "user_name",       limit: 30
+    t.string   "email",           limit: 70
+    t.string   "password_digest"
+    t.string   "user_token"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  create_table "api_v1_spots", force: :cascade do |t|
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "birdspotter_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "api_v1_spots", ["birdspotter_id"], name: "index_api_v1_spots_on_birdspotter_id"
 
   create_table "apikeys", force: :cascade do |t|
     t.string   "application_name"

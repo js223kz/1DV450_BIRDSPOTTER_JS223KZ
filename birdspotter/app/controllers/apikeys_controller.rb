@@ -16,7 +16,6 @@ class ApikeysController < ApplicationController
     redirect_to request.referrer || root_url
   end
   
-  
   #delete apikey if user is user who created it
   #or admin. Redirect to same page
   def destroy
@@ -31,7 +30,6 @@ class ApikeysController < ApplicationController
   
   
   private
-
     def apikey_params
       params.require(:apikey).permit(:application_name)
     end
