@@ -11,7 +11,12 @@ class ApplicationController < ActionController::Base
   def authenticate_developer_key
       #authenticate_or_request_with_http_token do|token, options|
       unless Apikey.exists?(application_key: params[:key])
-        render json: {message: 'Incorrect credentials'}, status: 401
+        render json: 
+          {
+            status: 401, 
+            message: 'Incorrect apikey. Please get your apikey at:  https://birdspotterdev.herokuapp.com'
+          }, 
+            status: 401
       end
   end
   
@@ -21,12 +26,14 @@ class ApplicationController < ActionController::Base
         birdspotter = Api::V1::Birdspotter.find_by(email: email)
         
         if birdspotter && birdspotter.authenticate(password)
-          render json: { token: birdspotter.user_token }
+          render json: { 
+            token: birdspotter.user_token 
+          }
         else
           render json: 
           {
             status: 401, 
-            message: 'Incorrect apikey. Please get your apikey at:  https://birdspotterdev.herokuapp.com'
+            message: 'Incorrect token'
           }, 
             status: 401
         end
