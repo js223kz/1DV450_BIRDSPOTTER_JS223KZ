@@ -28,6 +28,7 @@ class ApplicationController < ActionController::Base
         if birdspotter && birdspotter.authenticate(password)
           render json: { 
             token: birdspotter.user_token,
+            id: birdspotter.id,
             username: birdspotter.user_name,
             email: birdspotter.email
           }
