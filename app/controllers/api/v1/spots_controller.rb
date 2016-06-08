@@ -75,17 +75,15 @@ class Api::V1::SpotsController < ApplicationController
         #birdspotter id must be present
         if  params[:birdspotter].blank?
             render json: {
-                status: 400,
                 message: "Skaparens id saknas." 
-            }
+            }, status: 400
         end
         
         #at least one bird must be present
         if  params[:bird].blank?
             render json: {
-                status: 400,
                 message: "En birdspot måste innehålla minst en fågel." 
-            }
+            }, status: 400
         end
         
         #check if birdspotter exists
@@ -106,28 +104,25 @@ class Api::V1::SpotsController < ApplicationController
                         @spot.birds << @bird
                    else
                         render json: {
-                            status: 404,
                             message:  "En eller flera fåglar med det id:t finns inte."
-                        }
+                        }, status: 404
                     end
                 end
             else
                 render json: {
-                    status: 400,
                     message:  @spot.errors.full_messages 
-                }
+                }, status: 400
             end
         else
            render json: {
-                status: 404,
                 message: "Skapare med det id:t finns inte." 
-            }
+            }, status: 404
         end
         render json: { 
-            status: 201,
+            
             message: "Din birdspot är registerad. Tack!", 
             spots: Api::V1::SpotSerializer.new(@spot) 
-        }
+        }, status: 201
     end
     
     def destroy
