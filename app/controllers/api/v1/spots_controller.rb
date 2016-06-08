@@ -106,7 +106,7 @@ class Api::V1::SpotsController < ApplicationController
                         @spot.birds << @bird
                    else
                         render json: {
-                            tatus: 404,
+                            status: 404,
                             message:  "En eller flera fåglar med det id:t finns inte."
                         }
                     end
