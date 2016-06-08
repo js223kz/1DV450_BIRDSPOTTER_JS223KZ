@@ -5,24 +5,24 @@ class Api::V1::Bird < ActiveRecord::Base
     
     validates   :bird_name, 
                 :presence => {
-                    :message => 'A bird must have a name.'
+                    :message => 'Fågelns namn måste anges.'
                 },
                 :uniqueness => { 
                     case_sensitive: false,
-                    :message => 'This birds name already exists.'
+                    :message => 'Fågeln finns redan.'
                 }
     
     validates   :latin_name, 
                 :presence => {
-                    :message => 'Bird must have a latin name.'
+                    :message => 'Fågelns latinska namn måste anges.'
                 },
                 :uniqueness => { 
                     case_sensitive: false,
-                    :message => 'This birds latin name already exists.'
+                    :message => 'Fågelns latinska namn finns redan.'
                 }
     
     validates   :regularity, 
                 :presence => {
-                    :message => 'Bird must a regularity tag.'
+                    :message => 'Fågelns regularitet måste anges.'
                 }
 end

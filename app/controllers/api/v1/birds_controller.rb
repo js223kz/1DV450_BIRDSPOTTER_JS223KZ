@@ -11,12 +11,13 @@ class Api::V1::BirdsController < ApplicationController
 
         #if regularity is not defined get all birds
         if params[:regularity].blank?
-            render json: { 
-                status: "200 OK", 
+            render json: {
+                status: 200,
+                message: "OK",
                 totalCount: @birds.count,
                 birds: @serializer.new(@birds, each_serializer: Api::V1::BirdSerializer) 
-            },
-            status: 200
+            }
+            
             
         #if regularity is defined get birds based on regularity
         else
@@ -24,11 +25,12 @@ class Api::V1::BirdsController < ApplicationController
             @birds = @birds.where(regularity: @regularity)
             render json: 
             { 
-                status: "200 OK", 
+                status: 200,
+                message: "OK",
                 totalCount: @birds.count,
                 birds: @serializer.new(@birds, each_serializer: Api::V1::BirdSerializer) 
-            },
-            status: 200
+            }
+            
         end
     end
     
@@ -36,9 +38,10 @@ class Api::V1::BirdsController < ApplicationController
     def bird
         bird = Api::V1::Bird.find(params[:id])
         render json: {
-            message: "200 OK",
+            status: 200,
+            message: "OK",
             bird: Api::V1::BirdSerializer.new(bird) 
-        },
-        status: 200
+        }
+        
     end
 end

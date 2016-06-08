@@ -7,45 +7,45 @@ class Api::V1::Birdspotter < ActiveRecord::Base
     
     validates :user_name, 
                 :presence => {
-                    :message => 'You must enter a username.'
+                    :message => 'Du måste ange ett användarnamn.'
                         }, 
                 :length => { 
                     maximum: 30,
                     minimum: 4,
-                    too_long: 'Username length is maximum 30 characters.',
-                    too_short: 'Username length is minimum 4 characters.'
+                    too_long: 'Användarnamnet får vara max 30 tecken.',
+                    too_short: 'Användarnamnet måste vara minst 4 tecken långt.'
                 }, 
                 :uniqueness => { 
                     case_sensitive: false,
-                    :message => 'Username already exists.'
+                    :message => 'Användarnamnet existerar redan.'
                 }
                 
     validates :email, 
                 :presence => {
-                    :message => 'You must enter an email address.'
+                    :message => 'Du måste ange en e-postadress.'
                         }, 
                 :length => { 
                     maximum: 70,
-                    too_long: 'E-mail length is maximum 70 characters.'
+                    too_long: 'E-postadressens längd får max vara 70 tecken.'
                 }, 
                 :format => { 
                     with: VALID_EMAIL_REGEX,
-                    :message => 'E-mail address is not valid.'
+                    :message => 'E-postadressen är inte giltig.'
                 },
                 :uniqueness => { 
                     case_sensitive: false,
-                    :message => 'E-mail address already exists.'
+                    :message => 'E-postadressen existerar redan.'
                     
                 }
     
     has_secure_password
     validates :password, 
                 :presence =>{
-                    :message => 'You must enter a password.'
+                    :message => 'Du måste ange ett lösenord.'
                     },
                 length: { 
                     minimum: 6,
-                    too_short: 'Password length is minimum 6 characters.'
+                    too_short: 'Lösenordet måste vara minst 6 tecken långt.'
                 }
     
     # Returns the hash digest of the given string at min cost 

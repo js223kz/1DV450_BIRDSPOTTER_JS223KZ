@@ -7,21 +7,21 @@ class Api::V1::BirdspottersController < ApplicationController
     def birdspotters
         birdspotters = Api::V1::Birdspotter.all
         render json: {
-            message: "200 OK",
+            status: 200,
+            message: "OK",
             totalCount: birdspotters.count,
             spots: ActiveModel::ArraySerializer.new(birdspotters, each_serializer: Api::V1::BirdspotterSerializer)
-        }, 
-        status: 200
+        } 
     end
     
     #get birdspotter by id
     def birdspotter
         birdspotter = Api::V1::Birdspotter.find(params[:id])
         render json: {
-            message: "200 OK",
+            status: 200,
+            message: "OK",
             birdspotter: Api::V1::BirdspotterSerializer.new(birdspotter) 
-        },
-        status: 200
+        }
     end
 end
  

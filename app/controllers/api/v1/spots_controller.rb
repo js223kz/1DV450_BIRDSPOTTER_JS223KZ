@@ -13,11 +13,11 @@ class Api::V1::SpotsController < ApplicationController
         #get all spots
         if @birdspotter.blank? && @bird.blank?
             render json: { 
+                status: 200,
                 message: "200 OK" , 
                 totalCount: @spots.count, 
                 spots: ActiveModel::ArraySerializer.new(@spots, each_serializer: Api::V1::SpotSerializer) 
-            },
-            status: 200
+            }
         end
         
         #get all spots by birdspotter id
@@ -31,9 +31,10 @@ class Api::V1::SpotsController < ApplicationController
                 }
             else
                 render json: {
-                    message: "There are no spots created by a birdspotter with that id" 
-                },
-                status: 404
+                    status: 404,
+                    message: "Du har inte registrerat några birdspots ännu. Fram med kikaren!" 
+                }
+                
             end
         end
         
@@ -43,16 +44,18 @@ class Api::V1::SpotsController < ApplicationController
                 @bird = Api::V1::Bird.find(@bird)
                 @spots = @bird.spots
                 render json: { 
+                    status: 200,
                     message: "200 OK", 
                     totalCount: @spots.count,
                     spots: ActiveModel::ArraySerializer.new(@spots, each_serializer: Api::V1::SpotSerializer) 
-                },
-                status: 200
+                }
+                
             else
                 render json: {
-                    message: "There are no spots that contains a bird with that id" 
-                },
-                status: 404
+                    status: 404,
+                    message: "Det finns inga birdspots med det id:t." 
+                }
+                
             end
         end
     end
@@ -61,10 +64,10 @@ class Api::V1::SpotsController < ApplicationController
     def spot
         spot = Api::V1::Spot.find(params[:id])
         render json: {
+            status: 200,
             message: "200 OK",
             spot: Api::V1::SpotSerializer.new(spot), 
-        },
-        status: 200
+        }
     end
     
     #create a new spot
@@ -72,19 +75,17 @@ class Api::V1::SpotsController < ApplicationController
         #birdspotter id must be present
         if  params[:birdspotter].blank?
             render json: {
-               message: "Creator id must be present." 
-            },
-             status: 400
-            return
+                status: 400,
+                message: "Skaparens id saknas." 
+            }
         end
         
         #at least one bird must be present
         if  params[:bird].blank?
             render json: {
-                message: "A Spot must have at least one bird." 
-            },
-            status: 400
-            return
+                status: 400,
+                message: "En birdspot måste innehålla minst en fågel." 
+            }
         end
         
         #check if birdspotter exists
@@ -105,28 +106,28 @@ class Api::V1::SpotsController < ApplicationController
                         @spot.birds << @bird
                    else
                         render json: {
-                           message:  "One or several bird id:s doesn't exist."
-                        },
-                        status: 404
+                            status: 404,
+                            message:  "En eller flera fåglar med det id:t finns inte."
+                        }
                     end
                 end
             else
                 render json: {
+                    status: 400,
                     message:  @spot.errors.full_messages 
-                },
-                 status: 400
+                }
             end
         else
            render json: {
-                message: "Birdspotter with that id not found" 
-            },
-              status: 404
+                status: 404,
+                message: "Skapare med det id:t finns inte." 
+            }
         end
         render json: { 
-            message: "Spot was succesfully created", 
+            status: 201,
+            message: "Din birdspot är registerad. Tack!", 
             spots: Api::V1::SpotSerializer.new(@spot) 
-        },
-        status: 201
+        }
     end
     
     def destroy
@@ -134,15 +135,15 @@ class Api::V1::SpotsController < ApplicationController
             @spot = Api::V1::Spot.find(params[:id])
             @spot.destroy
             render json: {
-                message: "Spot was deleted"
-            },
-            status: 204
-            
+                status: 204,
+                message: "Birdspot raderades."
+            }
         else
            render json: {
-                message: "Spot with that id not found"
-            },
-            status: 404
+                status: 404,
+                message: "Birdspot med det id:t finns inte."
+            }
+            
             
         end
     end
@@ -152,9 +153,9 @@ class Api::V1::SpotsController < ApplicationController
       @spot.birds = []
         if @spot.nil?  
             render json: {
-                message: "Spot with that id not found"
-            },
-            status: 404
+                status: 404,
+                message: "Birdspot med det id:t finns inte."
+            }
         else
             #iterate through all birds
             spot_params[:bird].tr(' ','').split(',').each do |bird_id|
@@ -163,18 +164,18 @@ class Api::V1::SpotsController < ApplicationController
                     @spot.birds.push(@bird)
                else
                     render json: {
-                        message:  "One or several bird id:s doesn't exist."
-                    },
-                    status: 404
-                    
+                        status: 404,
+                        message:  "En eller flera fåglar med det id:t finns inte."
+                    }
                 end
             end
             @spot.update_attributes(spot_params.permit(:latitude, :longitude, :birds => @spot.birds))
             render json: {
-                message: "Spot has been updated",
+                status: 200,
+                message: "Din birdspot har uppdaterats.",
                 spots: Api::V1::SpotSerializer.new(@spot) 
-            },
-            status: 200
+            }
+            
         end
     end
 

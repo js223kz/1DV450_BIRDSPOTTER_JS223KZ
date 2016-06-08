@@ -7,13 +7,13 @@ class Api::V1::Spot < ActiveRecord::Base
     validates   :latitude,
                 :numericality => true,
                 :presence => {
-                    :message => 'Latitude needs to be specified'
+                    :message => 'Latitud måste anges.'
                 }
     
     validates   :longitude, 
                 :numericality => true,
                 :presence => {
-                    :message => 'Longitude needs to be specified'
+                    :message => 'Longitud måste anges.'
                 }
     
    
