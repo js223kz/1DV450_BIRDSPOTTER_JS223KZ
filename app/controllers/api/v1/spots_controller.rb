@@ -13,11 +13,11 @@ class Api::V1::SpotsController < ApplicationController
         #get all spots
         if @birdspotter.blank? && @bird.blank?
             render json: { 
-                status: 200,
-                message: "OK" , 
+                message: "200 OK" , 
                 totalCount: @spots.count, 
                 spots: ActiveModel::ArraySerializer.new(@spots, each_serializer: Api::V1::SpotSerializer) 
-            }
+            },
+            status: 200
         end
         
         #get all spots by birdspotter id
@@ -70,7 +70,7 @@ class Api::V1::SpotsController < ApplicationController
     #create a new spot
     def create
         #birdspotter id must be present
-        if  spot_params[:birdspotter].blank?
+        if  params[:birdspotter].blank?
             render json: {
                message: "Creator id must be present." 
             },
@@ -79,7 +79,7 @@ class Api::V1::SpotsController < ApplicationController
         end
         
         #at least one bird must be present
-        if  spot_params[:bird].blank?
+        if  params[:bird].blank?
             render json: {
                 message: "A Spot must have at least one bird." 
             },
@@ -88,18 +88,18 @@ class Api::V1::SpotsController < ApplicationController
         end
         
         #check if birdspotter exists
-        if Api::V1::Birdspotter.exists?(spot_params[:birdspotter])
+        if Api::V1::Birdspotter.exists?(params[:birdspotter])
             
             #if exists find birdspotter
-            @birdspotter = Api::V1::Birdspotter.find_by_id(spot_params[:birdspotter])
+            @birdspotter = Api::V1::Birdspotter.find_by_id(params[:birdspotter])
             
             #create a new spot and append to birdspotter
-            @spot = Api::V1::Spot.create(:latitude =>  spot_params[:latitude], :longitude => spot_params[:longitude])
+            @spot = Api::V1::Spot.create(:latitude =>  params[:latitude], :longitude => params[:longitude])
             if @spot.save
                 @birdspotter.spots << @spot
                 
                 #iterate through all birds and append each bird to newly created spot
-                 spot_params[:bird].tr(' ','').split(',').each do |bird_id|
+                 params[:bird].tr(' ','').split(',').each do |bird_id|
                     if Api::V1::Bird.exists?(bird_id)
                         @bird = Api::V1::Bird.find_by_id(bird_id)
                         @spot.birds << @bird
@@ -177,10 +177,5 @@ class Api::V1::SpotsController < ApplicationController
             status: 200
         end
     end
-    
-    private
-    def spot_params
-        json_params = ActionController::Parameters.new(JSON.parse(request.body.read))
-        json_params[:spot]
-    end
+
 end
