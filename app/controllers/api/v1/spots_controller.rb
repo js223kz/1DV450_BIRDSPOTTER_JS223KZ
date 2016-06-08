@@ -108,14 +108,14 @@ class Api::V1::SpotsController < ApplicationController
                         render json: {
                             status: 404,
                             message:  "En eller flera fåglar med det id:t finns inte."
-                        }
+                        }, status: 404
                     end
                 end
             else
                 render json: {
                     status: 400,
                     message:  @spot.errors.full_messages 
-                } 
+                }, status: 400 
             end
         else
            render json: {
@@ -127,7 +127,7 @@ class Api::V1::SpotsController < ApplicationController
             status: 201,
             message: "Din birdspot är registerad. Tack!", 
             spots: Api::V1::SpotSerializer.new(@spot) 
-        } 
+        }, status: 201
     end
     
     def destroy
@@ -137,12 +137,12 @@ class Api::V1::SpotsController < ApplicationController
             render json: {
                 status: 204,
                 message: "Birdspot raderades."
-            }
+            }, status: 204
         else
            render json: {
                 status: 404,
                 message: "Birdspot med det id:t finns inte."
-            }
+            }, status: 404
             
             
         end
