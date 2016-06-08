@@ -13,12 +13,11 @@ class Api::V1::SpotsController < ApplicationController
         #get all spots
         if @birdspotter.blank? && @bird.blank?
             render json: { 
-                message: "200 OK" , 
+                status: 200,
+                message: "OK" , 
                 totalCount: @spots.count, 
                 spots: ActiveModel::ArraySerializer.new(@spots, each_serializer: Api::V1::SpotSerializer) 
-            },
-            status: 200
-            return
+            }
         end
         
         #get all spots by birdspotter id
@@ -109,7 +108,6 @@ class Api::V1::SpotsController < ApplicationController
                            message:  "One or several bird id:s doesn't exist."
                         },
                         status: 404
-                        return
                     end
                 end
             else
@@ -117,14 +115,12 @@ class Api::V1::SpotsController < ApplicationController
                     message:  @spot.errors.full_messages 
                 },
                  status: 400
-                return
             end
         else
            render json: {
                 message: "Birdspotter with that id not found" 
             },
               status: 404
-            return
         end
         render json: { 
             message: "Spot was succesfully created", 
@@ -170,7 +166,7 @@ class Api::V1::SpotsController < ApplicationController
                         message:  "One or several bird id:s doesn't exist."
                     },
                     status: 404
-                    return
+                    
                 end
             end
             @spot.update_attributes(spot_params.permit(:latitude, :longitude, :birds => @spot.birds))
