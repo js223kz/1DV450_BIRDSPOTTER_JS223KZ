@@ -88,6 +88,14 @@ class Api::V1::SpotsController < ApplicationController
             } 
         end
         
+         #latitude and longitude must be present
+        if  params[:latitude].blank? || params[:longitude].blank?
+            render json: {
+                status: 400,
+                message: "En birdspot måste innehålla latitud och longitude." 
+            } 
+        end
+        
         #check if birdspotter exists
         if Api::V1::Birdspotter.exists?(params[:birdspotter])
             
