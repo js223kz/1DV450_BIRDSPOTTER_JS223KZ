@@ -77,7 +77,8 @@ class Api::V1::SpotsController < ApplicationController
             render json: {
                 status: 400,
                 message: "Skaparens id saknas." 
-            } 
+            }
+            return
         end
         
         #at least one bird must be present
@@ -85,7 +86,8 @@ class Api::V1::SpotsController < ApplicationController
             render json: {
                 status: 400,
                 message: "En birdspot måste innehålla minst en fågel." 
-            } 
+            }
+            return
         end
         
          #latitude and longitude must be present
@@ -93,7 +95,8 @@ class Api::V1::SpotsController < ApplicationController
             render json: {
                 status: 400,
                 message: "En birdspot måste innehålla latitud och longitude." 
-            } 
+            }
+            return
         end
         
         #check if birdspotter exists
@@ -118,6 +121,7 @@ class Api::V1::SpotsController < ApplicationController
                             message:  "En eller flera fåglar med det id:t finns inte."
                         }, status: 404
                     end
+                    return
                 end
             else
                 render json: {
@@ -125,17 +129,20 @@ class Api::V1::SpotsController < ApplicationController
                     message:  @spot.errors.full_messages 
                 }, status: 400 
             end
+            return
         else
            render json: {
                 status: 404,
                 message: "Skapare med det id:t finns inte." 
-            } 
+            }
+            return
         end
         render json: { 
             status: 201,
             message: "Din birdspot är registerad. Tack!", 
             spots: Api::V1::SpotSerializer.new(@spot) 
         }, status: 201
+        return
     end
     
     def destroy
