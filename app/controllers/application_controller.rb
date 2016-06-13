@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
         render json: 
           {
             status: 401, 
-            message: 'Incorrect apikey. Please get your apikey at:  https://birdspotterdev.herokuapp.com'
+            message: 'Felaktig API-nyckel. Skapa en nyckel här:  https://birdspotterdev.herokuapp.com'
           }, 
             status: 401
       end
@@ -27,16 +27,19 @@ class ApplicationController < ActionController::Base
         
         if birdspotter && birdspotter.authenticate(password)
           render json: { 
+            status: 200, 
+            message: "OK",
             token: birdspotter.user_token,
             id: birdspotter.id,
             username: birdspotter.user_name,
             email: birdspotter.email
-          }
+          }, 
+            status: 200
         else
           render json: 
           {
             status: 401, 
-            message: 'Incorrect token'
+            message: 'Felaktiga inloggningsuppgifter.'
           }, 
             status: 401
         end
@@ -65,20 +68,11 @@ class ApplicationController < ActionController::Base
   #Overrides default values in request_http_token_authentication built in method
   def request_http_token_authentication(realm = "Application")
     self.headers["WWW-Authenticate"] = %(Token realm="#{realm.gsub(/"/, "")}")
-    render json:
-    {
+    render json:{
       status: 401,
-      message: "HTTP Token: Access denied due to missing or invalid user token."
+      message: "HTTP Token: Åtkomst nekad på grund av felaktig användartoken."
     }, 
     status: 401
-  end
-  
-  def not_found
-      render json: { 
-        status: 404,
-        message: "Not found"
-      }, 
-      status: 404 
   end
   
   def destroy_session
