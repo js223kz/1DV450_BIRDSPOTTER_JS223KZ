@@ -55,7 +55,6 @@ class Api::V1::SpotsController < ApplicationController
                 }, status: 404
                 
             end
-            return
         end
     end
     
