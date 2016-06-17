@@ -30,7 +30,6 @@ class Api::V1::BirdsController < ApplicationController
                 totalCount: @birds.count,
                 birds: @serializer.new(@birds, each_serializer: Api::V1::BirdSerializer) 
             }
-            
         end
     end
     

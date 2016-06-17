@@ -14,11 +14,10 @@ class Api::V1::SpotsController < ApplicationController
         if @birdspotter.blank? && @bird.blank?
             render json: { 
                 status: 200,
-                message: "200 OK" , 
+                message: "OK" , 
                 totalCount: @spots.count, 
                 spots: ActiveModel::ArraySerializer.new(@spots, each_serializer: Api::V1::SpotSerializer) 
             }, status: 200
-            return
         end
         
         #get all spots by birdspotter id
@@ -36,7 +35,6 @@ class Api::V1::SpotsController < ApplicationController
                     message: "Du har inte registrerat några birdspots ännu. Fram med kikaren!" 
                 }, status: 404
             end
-            return
         end
         
         #get all spots by bird id
