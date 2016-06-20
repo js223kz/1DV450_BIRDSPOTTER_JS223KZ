@@ -90,5 +90,6 @@ class Api::V1::BirdsController < ApplicationController
                 message: "Fågeln är registrerad och finns nu i listan.", 
                 spots: Api::V1::BirdSerializer.new(@bird) 
         }, status: 201
+        return
     end
 end
