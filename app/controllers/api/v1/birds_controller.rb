@@ -1,6 +1,7 @@
 class Api::V1::BirdsController < ApplicationController
     protect_from_forgery with: :null_session
     before_action :destroy_session
+    before_filter :authenticate_birdspotter_from_token, :only => [:create]
     before_filter :authenticate_developer_key
     
     
@@ -42,5 +43,53 @@ class Api::V1::BirdsController < ApplicationController
             bird: Api::V1::BirdSerializer.new(bird) 
         }
         
+    end
+    
+     #create a new bird
+    def create
+       #bird name must be present
+        if  params[:name].blank?
+            render json: {
+                status: 400,
+                message: "Fågelns namn måste anges." 
+            }, status: 400
+            return
+        end
+        
+        #latin name must be present
+        if  params[:latin].blank?
+            render json: {
+                status: 400,
+                message: "Fågelns latinska namn måste anges." 
+            }, status: 400
+            return
+        end
+        
+        #regularity must be present
+        if  params[:regularity].blank?
+            render json: {
+                status: 400,
+                message: "Fågelns regularitet måste anges." 
+            }, status: 400
+            return
+        end
+        
+        #check if birdspotter exists
+        if Api::V1::Bird.exists?(params[:name])
+            render json: {
+                status: 400,
+                message: "Fågeln finns redan" 
+            }, status: 400
+            return
+        end
+        
+        @bird = Api::V1::Bird.create(:bird_name =>  params[:name], :latin_name => params[:latin], :regularity => params[:regularity])
+        @bird.save
+        render json: {
+                status: 201,
+                message: "Fågeln är registrerad och finns nu i listan.", 
+                spots: Api::V1::SpotSerializer.new(@bird) 
+        }, status: 201
+            
     end
 end

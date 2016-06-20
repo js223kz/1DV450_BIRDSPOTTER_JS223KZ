@@ -9,7 +9,7 @@ class Api::V1::SpotsController < ApplicationController
         @bird = params[:bird]
         @spots = Api::V1::Spot.all
         @birds = Api::V1::Bird.all
-        
+
         #get all spots
         if @birdspotter.blank? && @bird.blank?
             render json: { 
