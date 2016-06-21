@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get 'birds'   => 'birds#birds'
+      post 'birds' => 'birds#create'
       get 'birds/:id' => 'birds#bird'
       get 'birdspotters' => 'birdspotters#birdspotters'
       get 'birdspotters/:id' => 'birdspotters#birdspotter'
