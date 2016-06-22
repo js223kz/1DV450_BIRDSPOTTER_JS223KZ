@@ -78,13 +78,14 @@ class Api::V1::BirdsController < ApplicationController
                 message: "Fågeln finns redan" 
             }
         else
-            bird = Api::V1::Bird.create(:bird_name => params[:name], :latin_name => params[:latin], :regularity => params[:regularity])
-            bird.save
+            @bird = Api::V1::Bird.create(:bird_name => params[:name], :latin_name => params[:latin], :regularity => params[:regularity])
+            if @bird.save 
             render json: {
                     status: 201,
                     message: "Fågeln är registrerad och finns nu i listan.", 
                     bird: Api::V1::BirdSerializer.new(bird) 
             }
+            end
         end
     end
 end
