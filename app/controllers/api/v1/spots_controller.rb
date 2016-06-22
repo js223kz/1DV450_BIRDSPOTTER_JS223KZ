@@ -182,7 +182,6 @@ class Api::V1::SpotsController < ApplicationController
                         status: 404,
                         message:  "En eller flera fåglar med det id:t finns inte."
                     }
-                    return
                 end
                 
             end
@@ -193,6 +192,5 @@ class Api::V1::SpotsController < ApplicationController
                 spots: Api::V1::SpotSerializer.new(@spot) 
             }
         end
-        return
     end
 end

@@ -53,7 +53,6 @@ class Api::V1::BirdsController < ApplicationController
                 status: 400,
                 message: "Fågelns namn måste anges." 
             }, status: 400
-            return
         end
         
         #latin name must be present
@@ -62,7 +61,6 @@ class Api::V1::BirdsController < ApplicationController
                 status: 400,
                 message: "Fågelns latinska namn måste anges." 
             }, status: 400
-            return
         end
         
         #regularity must be present
@@ -71,7 +69,6 @@ class Api::V1::BirdsController < ApplicationController
                 status: 400,
                 message: "Fågelns regularitet måste anges." 
             }, status: 400
-            return
         end
         
         #check if bird already exists
@@ -80,7 +77,6 @@ class Api::V1::BirdsController < ApplicationController
                 status: 400,
                 message: "Fågeln finns redan" 
             }, status: 400
-            return
         end
         
         @bird = Api::V1::Bird.create(:bird_name => params[:name], :latin_name => params[:latin], :regularity => params[:regularity])
