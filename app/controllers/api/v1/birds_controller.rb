@@ -74,8 +74,8 @@ class Api::V1::BirdsController < ApplicationController
             return
         end
         
-        #check if birdspotter exists
-        if Api::V1::Bird.exists?(params[:name])
+        #check if bird already exists
+        if Api::V1::Bird.where(:bird_name => params[:name])
             render json: {
                 status: 400,
                 message: "Fågeln finns redan" 
@@ -90,6 +90,6 @@ class Api::V1::BirdsController < ApplicationController
                 message: "Fågeln är registrerad och finns nu i listan.", 
                 bird: Api::V1::BirdSerializer.new(@bird) 
         }, status: 201
-        return
+        
     end
 end
