@@ -52,7 +52,7 @@ class Api::V1::BirdsController < ApplicationController
             render json: {
                 status: 400,
                 message: "Fågelns namn måste anges." 
-            }, status: 400
+            }
         end
         
         #latin name must be present
@@ -60,7 +60,7 @@ class Api::V1::BirdsController < ApplicationController
             render json: {
                 status: 400,
                 message: "Fågelns latinska namn måste anges." 
-            }, status: 400
+            }
         end
         
         #regularity must be present
@@ -68,7 +68,7 @@ class Api::V1::BirdsController < ApplicationController
             render json: {
                 status: 400,
                 message: "Fågelns regularitet måste anges." 
-            }, status: 400
+            }
         end
         
         #check if bird already exists
@@ -76,7 +76,7 @@ class Api::V1::BirdsController < ApplicationController
             render json: {
                 status: 400,
                 message: "Fågeln finns redan" 
-            }, status: 400
+            }
         else
             bird = Api::V1::Bird.create(:bird_name => params[:name], :latin_name => params[:latin], :regularity => params[:regularity])
             bird.save
@@ -84,7 +84,7 @@ class Api::V1::BirdsController < ApplicationController
                     status: 201,
                     message: "Fågeln är registrerad och finns nu i listan.", 
                     bird: Api::V1::BirdSerializer.new(bird) 
-            }, status: 201 
+            }
         end
     end
 end
