@@ -72,7 +72,7 @@ class Api::V1::BirdsController < ApplicationController
         end
         
         #check if bird already exists
-        if Api::V1::Bird.where(:bird_name => params[:name])
+        if Api::V1::Bird.exists?(:bird_name => params[:name])
             render json: {
                 status: 400,
                 message: "Fågeln finns redan" 
