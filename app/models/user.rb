@@ -5,31 +5,38 @@ class User < ActiveRecord::Base
     VALID_EMAIL_REGEX = /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
     validates :username, 
                 :presence => {
-                    :message => 'Du måste fylla i ett användarnamn.'
-                        }, 
+                    message: 'Du måste fylla i ett användarnamn.'
+                },
                 :length => { 
                     maximum: 70,
                     too_long: 'E-post kan max vara 70 tecken.'
                 }, 
                 :format => { 
                     with: VALID_EMAIL_REGEX,
-                    :message => 'E-postadressen verkar vara i ogiltigt format.'
+                    message: 'E-postadressen verkar vara i ogiltigt format.'
                 },
                 :uniqueness => { 
                     case_sensitive: false,
-                    :message => 'E-postadressen finns redan.'
-                    
+                    message: 'E-postadressen finns redan.'
                 }
     
-    has_secure_password
+    has_secure_password validations: false
     validates :password, 
                 :presence =>{
-                    :message => 'Du måste fylla i ett lösenord'
-                    },
-                length: { 
+                    message: 'Du måste fylla i ett lösenord.'
+                },
+                :length =>{ 
                     minimum: 6,
-                    too_short: 'Lösenordet måste vara minst 6 tecken.'
+                    too_short: 'Lösenordet måste innehålla minst 6 tecken.'
                 }
+                
+    validates :password_confirmation, 
+                :presence =>{
+                    message: 'Du måste bekräfta lösenordet.'
+                }
+                
+    validates_confirmation_of :password,
+                              message: 'Lösenorden matchar inte.'
     
     # Returns the hash digest of the given string at min cost 
     # in testing and normal high cost in production
