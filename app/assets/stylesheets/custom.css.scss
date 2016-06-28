@@ -58,11 +58,11 @@ textarea {
     float: left;
      @include font-size(24px)
   }
-  .header_link{
+  a {
     color: white;
-      &:hover {
-        color: black;
-        text-decoration: none;
+    &:hover {
+      color: black;
+      text-decoration: none;
     }
   }
 }
