@@ -147,7 +147,7 @@ class Api::V1::SpotsController < ApplicationController
     end
     
     def destroy
-        if Api::V1::Spot.exists?(params[:id])
+        if Api::V1::Spot.exists?(:id => params[:id])
             @spot = Api::V1::Spot.find(params[:id])
             @spot.destroy
             render json: {
@@ -160,7 +160,6 @@ class Api::V1::SpotsController < ApplicationController
                 message: "Birdspot med det id:t finns inte."
             }, status: 404
         end
-        return 
     end
     
     def update
