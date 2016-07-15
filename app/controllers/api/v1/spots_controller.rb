@@ -153,12 +153,12 @@ class Api::V1::SpotsController < ApplicationController
             render json: {
                 status: 204,
                 message: "Birdspot raderades."
-            }, status: 204
+            }
         else
            render json: {
                 status: 404,
                 message: "Birdspot med det id:t finns inte."
-            }, status: 404
+            }
         end
     end
     
