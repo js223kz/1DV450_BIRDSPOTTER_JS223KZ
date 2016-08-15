@@ -8,7 +8,12 @@ Bundler.require(*Rails.groups)
 
 module Birdspotter
   class Application < Rails::Application
-
+  
+    # in config/application.rb
+  config.action_dispatch.default_headers = {
+      'Access-Control-Allow-Origin' => '*',
+      'Access-Control-Request-Method' => %w{GET POST PUT DELETE OPTIONS}.join(",")
+    }
 
 
     # Settings in config/environments/* take precedence over those specified here.
