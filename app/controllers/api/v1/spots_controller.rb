@@ -21,9 +21,15 @@ class Api::V1::SpotsController < ApplicationController
         end
         
         #get all spots by birdspotter id
-        if !@birdspotter.blank?
+        if !@birdspotter.blank? && @bird.blank?
             if @spots.exists?(@birdspotter)
                 @spots = @spots.where(birdspotter_id: @birdspotter)
+                render json: { 
+                    status: 200, 
+                    message: "OK", 
+                    totalCount: @spots.count,
+                    spots: ActiveModel::ArraySerializer.new(@spots, each_serializer: Api::V1::SpotSerializer) 
+                }
             else
                 render json: {
                     status: 404,
@@ -33,25 +39,24 @@ class Api::V1::SpotsController < ApplicationController
         end
         
         #get all spots by bird id
-        if !@bird.blank?
+        if @birdspotter.blank? && !@bird.blank?
             if @birds.exists?(@bird)
                 @bird = Api::V1::Bird.find(@bird)
                 @spots = @bird.spots
-                
-            else
-                render json: {
-                    status: 404,
-                    message: "Det finns inga birdspots med begärd fågel registrerad" 
-                }
-                
-            end
-        end
-        render json: { 
+                render json: { 
                     status: 200,
                     message: "OK", 
                     totalCount: @spots.count,
                     spots: ActiveModel::ArraySerializer.new(@spots, each_serializer: Api::V1::SpotSerializer) 
                 }
+            else
+                render json: {
+                    status: 404,
+                    message: "Det finns inga birdspots med det id:t." 
+                }
+                
+            end
+        end
     end
     
     #get spot by id
