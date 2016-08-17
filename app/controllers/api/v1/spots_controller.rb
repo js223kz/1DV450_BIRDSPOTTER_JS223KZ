@@ -11,7 +11,7 @@ class Api::V1::SpotsController < ApplicationController
         @birds = Api::V1::Bird.all
 
         #get all spots
-        if @birdspotter.blank? && @bird.blank? && @offset.blank?
+        if @birdspotter.blank? && @bird.blank?
             render json: { 
                 status: 200,
                 message: "OK", 
