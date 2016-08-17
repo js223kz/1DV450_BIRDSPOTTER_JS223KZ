@@ -11,7 +11,7 @@ class Api::V1::SpotsController < ApplicationController
         @birds = Api::V1::Bird.all
 
         #get all spots
-        if @birdspotter.blank? && @bird.blank?
+        if @birdspotter.blank? && @bird.blank? && @offset.blank?
             render json: { 
                 status: 200,
                 message: "OK", 
@@ -21,15 +21,9 @@ class Api::V1::SpotsController < ApplicationController
         end
         
         #get all spots by birdspotter id
-        if !@birdspotter.blank? && @bird.blank?
+        if !@birdspotter.blank?
             if @spots.exists?(@birdspotter)
                 @spots = @spots.where(birdspotter_id: @birdspotter)
-                render json: { 
-                    status: 200, 
-                    message: "OK", 
-                    totalCount: @spots.count,
-                    spots: ActiveModel::ArraySerializer.new(@spots, each_serializer: Api::V1::SpotSerializer) 
-                }
             else
                 render json: {
                     status: 404,
@@ -39,24 +33,25 @@ class Api::V1::SpotsController < ApplicationController
         end
         
         #get all spots by bird id
-        if @birdspotter.blank? && !@bird.blank?
+        if !@bird.blank?
             if @birds.exists?(@bird)
                 @bird = Api::V1::Bird.find(@bird)
                 @spots = @bird.spots
-                render json: { 
+                
+            else
+                render json: {
+                    status: 404,
+                    message: "Det finns inga birdspots med begärd fågel registrerad" 
+                }
+                
+            end
+        end
+        render json: { 
                     status: 200,
                     message: "OK", 
                     totalCount: @spots.count,
                     spots: ActiveModel::ArraySerializer.new(@spots, each_serializer: Api::V1::SpotSerializer) 
                 }
-            else
-                render json: {
-                    status: 404,
-                    message: "Det finns inga birdspots med det id:t." 
-                }
-                
-            end
-        end
     end
     
     #get spot by id
