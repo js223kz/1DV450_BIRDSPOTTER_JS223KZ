@@ -1,4 +1,7 @@
 class Api::V1::PositionController < ApplicationController
+    protect_from_forgery with: :null_session
+    before_action :destroy_session
+    before_filter :authenticate_developer_key
     
     def spots_nearby
         @lat = params[:lat]
